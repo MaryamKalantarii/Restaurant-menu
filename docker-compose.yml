@@ -1,0 +1,10 @@
+
+services:
+ backend:
+  build: .
+  container_name: menu
+  command: python manage.py runserver 0.0.0.0:8000
+  volumes:
+   - .:/core
+  ports:
+   - "8000:8000"
