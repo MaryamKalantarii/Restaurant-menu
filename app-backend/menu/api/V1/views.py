@@ -2,13 +2,13 @@ from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import MenuItemSerializer, CategorySerializer 
-from .permissions import IsAdminAndVerifiedOrReadOnly
-from .models import MenuItem, Category, ProductStatusType
+# from .permissions import IsAdminAndVerifiedOrReadOnly
+from menu.models import MenuItem, Category, ProductStatusType
 
 class MenuItemView(viewsets.ModelViewSet):
     queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
     serializer_class = MenuItemSerializer 
-    permission_classes = [IsAdminAndVerifiedOrReadOnly]
+    # permission_classes = [IsAdminAndVerifiedOrReadOnly]
     lookup_field = 'slug'
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -23,7 +23,7 @@ class MenuItemView(viewsets.ModelViewSet):
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAdminAndVerifiedOrReadOnly]
+    # permission_classes = [IsAdminAndVerifiedOrReadOnly]
     lookup_field = 'slug'
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
