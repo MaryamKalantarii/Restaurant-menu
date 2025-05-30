@@ -1,13 +1,13 @@
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from .serializers import MenuItemSerializer, CategorySerializer  # به جای ProductSerializer از MenuItemSerializer استفاده کنید
+from .serializers import MenuItemSerializer, CategorySerializer 
 from .permissions import IsAdminAndVerifiedOrReadOnly
 from .models import MenuItem, Category, ProductStatusType
 
 class MenuItemView(viewsets.ModelViewSet):
-    queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value)  # اینجا از MenuItem استفاده شده
-    serializer_class = MenuItemSerializer  # سریالایزر مرتبط با MenuItem
+    queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
+    serializer_class = MenuItemSerializer 
     permission_classes = [IsAdminAndVerifiedOrReadOnly]
     lookup_field = 'slug'
 
