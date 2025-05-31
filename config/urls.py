@@ -37,8 +37,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include("menu.urls")),
+    path('api/v1/', include('menu.api.V1.urls')),  
     path('api-auth/', include('rest_framework.urls')),
+    
 
     #drf_yasg
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
