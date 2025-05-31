@@ -6,6 +6,7 @@ from .serializers import MenuItemSerializer, CategorySerializer
 from menu.models import MenuItem, Category, ProductStatusType
 
 
+
 class MenuItemView(viewsets.ModelViewSet):
     queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
     serializer_class = MenuItemSerializer 
@@ -25,9 +26,7 @@ class MenuItemView(viewsets.ModelViewSet):
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
- 
     lookup_field = 'slug'
-
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title']
     ordering_fields = ['title']
