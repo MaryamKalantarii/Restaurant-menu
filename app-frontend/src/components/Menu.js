@@ -6,7 +6,7 @@ function Menu() {
   const [activeCategory, setActiveCategory] = useState("starters"); // دسته پیش‌فرض
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/menu-items/") // آدرس API خودت رو بذار
+    axios.get("http://127.0.0.1:8000/menu/api/V1/menu-items/") // آدرس API خودت رو بذار
       .then((response) => {
         setMenuItems(response.data);
       })

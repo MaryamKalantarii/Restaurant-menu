@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'menu',
+    'reservations',
+    'accounts',
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders'
 ]
-
+   
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
