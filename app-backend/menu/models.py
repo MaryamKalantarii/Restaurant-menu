@@ -1,7 +1,10 @@
 from django.db import models
 from decimal import Decimal
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+User = get_user_model()
 
 
 class Category(models.Model):
