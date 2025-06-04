@@ -3,11 +3,11 @@ from .models import Reservation
 
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "phone", "date", "time", "people", "created_at")
+    list_display = ("name", "email", "phone", "date", "time", "people", "created_date")
     list_filter = ("date", "time")
     search_fields = ("name", "email", "phone")
-    ordering = ("-created_at",)
-    readonly_fields = ("created_at",)
+    ordering = ("-created_date",)
+    readonly_fields = ("created_date",)
 
     fieldsets = (
         (None, {
@@ -17,6 +17,6 @@ class ReservationAdmin(admin.ModelAdmin):
             "fields": ("date", "time")
         }),
         ("اطلاعات سیستمی", {
-            "fields": ("created_at",)
+            "fields": ("created_date",)
         }),
     )
