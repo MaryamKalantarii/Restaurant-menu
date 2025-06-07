@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+
 
 function Header() {
   const [activeLink, setActiveLink] = useState('#hero');
@@ -37,9 +39,15 @@ function Header() {
             ))}
             <li>
               <Link to="/login" className="nav-link">Login</Link>
+              
+            </li>
+            <li>
+              <ThemeToggle />
+
             </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+         
         </nav>
 
         <a className="btn-getstarted" href="#book-a-table">Book a Table</a>
