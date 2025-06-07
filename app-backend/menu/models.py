@@ -1,6 +1,5 @@
 from django.db import models
 from decimal import Decimal
-from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -22,7 +21,7 @@ class ProductStatusType(models.IntegerChoices):
 
 
 class MenuItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='menu_items', null=True, blank=True, verbose_name="کاربر")
+    user = models.ForeignKey('accounts.CustomeUser', on_delete=models.CASCADE, related_name='menu_items', null=True, blank=True, verbose_name="کاربر")
     category = models.ManyToManyField(Category, verbose_name="دسته‌بندی‌ها")
     title = models.CharField(max_length=255, verbose_name="نام آیتم")
     slug = models.SlugField(allow_unicode=True, unique=True, verbose_name="نامک")

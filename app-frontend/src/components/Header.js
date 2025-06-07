@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [activeLink, setActiveLink] = useState('#hero');
@@ -34,6 +35,9 @@ function Header() {
                 </a>
               </li>
             ))}
+            <li>
+              <Link to="/login" className="nav-link">Login</Link>
+            </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

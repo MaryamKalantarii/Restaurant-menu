@@ -5,7 +5,7 @@ from pathlib import Path
 from django.core.files import File
 from django.utils.text import slugify
 from menu.models import MenuItem, Category
-from django.contrib.auth.models import User
+from accounts.models import CustomeUser
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
         image_list = [f"images/menu-item-{i}.png" for i in range(1, 6)] 
         categories = list(Category.objects.all())
-        user = User.objects.first()
+        user = CustomeUser.objects.first()
 
         if not categories:
             self.stdout.write(self.style.WARNING("❌ No categories found. Please create some first."))
