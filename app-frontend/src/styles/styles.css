@@ -1,0 +1,104 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --muted-color: #d8e0e7;
+}
+
+body.dark-theme {
+  --bg-color: #202020ec;
+  --text-color: #f8f9fa;
+--muted-color: #d0d0d0;
+}
+
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.card, .section, header, footer {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* متن‌های طوسی که مثلا کلاس text-muted دارن */
+.text-muted {
+  color: var(--muted-color) !important;
+}
+
+/* برای متن‌های پیش‌فرض بوت‌استرپ */
+.text-dark {
+  color: var(--text-color) !important;
+}
+/* استایل حالت دارک برای متون با کلاس text-dark */
+body.dark-theme .text-dark {
+  color: var(--text-color) !important;
+}
+
+/* استایل حالت دارک برای سایر رنگ‌ها */
+body.dark-theme .text-muted {
+  color: var(--muted-color) !important;
+}
+/* روشن‌تر کردن تمام متن‌های طوسی در دارک مود */
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+
+body.dark-theme  p {
+  color: #d6d6d6 !important;
+  font-weight: 500;
+}
+
+
+
+/* حالت دارک برای هدر */
+body.dark-theme #header {
+  background-color: #1c1c1c !important; /* پس‌زمینه تیره برای هدر */
+  border-bottom: 1px solid #333 !important;
+}
+
+/* متن‌های هدر مثل لوگو و منوها */
+body.dark-theme #header .logo h1,
+body.dark-theme #header .logo span,
+body.dark-theme #header .navmenu a,
+body.dark-theme #header .btn-getstarted {
+  color: #f8f9fa !important;
+}
+/* استایل عمومی برای دکمه تغییر تم */
+.theme-toggle-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* حالت دارک برای دکمه تغییر تم */
+body.dark-theme .theme-toggle-btn {
+  color: #f8f9fa; /* رنگ مشابه به نوار منو */
+}
+
+/* حالت لایت برای دکمه تغییر تم */
+body.light-theme .theme-toggle-btn {
+  color: #000000; /* رنگ مشابه به نوار منو */
+}
+
+/* حالت hover برای دکمه تغییر تم */
+.theme-toggle-btn:hover {
+  color: #ffcc70; /* رنگ روشن در حالت هاور */
+}
+
+/* در صورت نیاز می‌توانید این حالت‌ها را تغییر دهید */
+
+
+
+
+
+
+
