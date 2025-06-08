@@ -8,3 +8,35 @@ services:
    - .:/core
   ports:
    - "8000:8000"
+
+
+ smtp4dev:
+    image: rnwood/smtp4dev:v3
+    restart: always
+    ports:
+      - '5000:80'
+      - '25:25'
+      - '143:143'
+    volumes:
+        - smtp4dev-data:/smtp4dev
+    environment:
+      - ServerOptions__HostName=smtp4dev
+
+ redis:
+    container_name: redis-restauran
+    image: redis
+    restart: always
+    ports:
+    - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+
+ worker:
+    build: .
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/core
+    depends_on:
+      - redis
+      - backend
+volumes:
+  smtp4dev-data:
