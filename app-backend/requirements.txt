@@ -17,6 +17,7 @@ django-celery-beat==2.8.1
 django-celery-email==3.0.0
 django-cors-headers==4.7.0
 django-filter==25.1
+django-mail-templated==2.6.5
 django-timezone-field==7.1
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
