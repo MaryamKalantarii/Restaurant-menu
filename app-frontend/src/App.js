@@ -15,6 +15,7 @@ import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AuthForm from './components/AuthForm';
+import EmailVerified from './components/EmailVerified';
 import './styles/styles.css'; // استایل‌ها
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             </>
           } />
           <Route path="/login" element={<AuthForm />} />
+          <Route path="/email-verified" element={<EmailVerified />} />
         </Routes>
         <Footer />
       </Router>

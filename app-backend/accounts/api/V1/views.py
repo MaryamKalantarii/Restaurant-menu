@@ -8,7 +8,7 @@ from .serializers import (
 )
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,redirect
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.api.V1.tasks import send_email_with_celery
 from accounts.models import CustomeUser
@@ -74,15 +74,12 @@ class IsVerifiedView(GenericAPIView):
             user = get_object_or_404(CustomeUser, id=user_id)
             user.is_verified = True
             user.save()
-            return Response({"detail": "حساب شما با موفقیت تأیید شد"})
-        except:
-            return Response(
-                {
-                    "detail": "توکن شما ممکن است منقضی شده باشد یا ساختار آن تغییر کند...",
-                    "resend email": "http://127.0.0.1:8000/accounts/api/V1/resend",
-                }
-            )
 
+            # ✅ ریدایرکت مستقیم به فرانت
+            return redirect("http://localhost:3000/email-verified?status=success")
+        
+        except:
+            return redirect("http://localhost:3000/email-verified?status=error")
 
 class ResendEmailView(GenericAPIView):
     """
