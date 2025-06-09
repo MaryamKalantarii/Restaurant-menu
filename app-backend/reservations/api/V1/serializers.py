@@ -2,6 +2,8 @@
 from rest_framework import serializers
 from ...models import Reservation
 from datetime import datetime, time
+from accounts.api.V1.serializers import GetUserSerializer
+
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,3 +20,11 @@ class ReservationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("رزرو فقط بین ساعت 12 تا 22 ممکن است.")
         
         return data
+    
+
+class CustomerReservationSerializer(serializers.ModelSerializer):
+    user = GetUserSerializer(read_only=True)
+    
+    class Meta:
+        model = Reservation
+        fields = '__all__'

@@ -1,6 +1,11 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 class Reservation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reservation_user")
     name = models.CharField(max_length=100,verbose_name="نام")
     email = models.EmailField(verbose_name="ایمیل")
     phone = models.CharField(max_length=15,verbose_name="شماره تلفن")
@@ -12,5 +17,6 @@ class Reservation(models.Model):
     class Meta:
         ordering = ["-created_date"]
         verbose_name = "رزرو میز"
+
     def __str__(self):
         return f"{self.name} - {self.date} {self.time}"
