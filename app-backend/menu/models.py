@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from decimal import Decimal
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -9,6 +10,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug or (self.pk and Category.objects.get(pk=self.pk).title != self.title):
+            self.slug = slugify(self.title, allow_unicode=True)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "دسته‌بندی"
@@ -22,12 +28,11 @@ class ProductStatusType(models.IntegerChoices):
 
 class MenuItem(models.Model):
     user = models.ForeignKey('accounts.CustomeUser', on_delete=models.CASCADE, related_name='menu_items', null=True, blank=True, verbose_name="کاربر")
-    category = models.ManyToManyField(Category, verbose_name="دسته‌بندی‌ها")
+    category = models.ManyToManyField(Category, verbose_name="دسته‌بندی‌ها", related_name="categories")
     title = models.CharField(max_length=255, verbose_name="نام آیتم")
     slug = models.SlugField(allow_unicode=True, unique=True, verbose_name="نامک")
     description = models.TextField(verbose_name="توضیحات")
-    image1 = models.ImageField(upload_to='menu_items', verbose_name="تصویر اصلی")
-    image2 = models.ImageField(upload_to='menu_items', null=True, blank=True, verbose_name="تصویر دوم")
+    image = models.ImageField(upload_to='menu_items', verbose_name="تصویر اصلی")
 
     stock = models.PositiveIntegerField(default=0, verbose_name="موجودی")
     status = models.IntegerField(choices=ProductStatusType.choices, default=ProductStatusType.publish.value, verbose_name="وضعیت")
@@ -48,6 +53,13 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+    def save(self, *args, **kwargs):
+        if not self.slug or (self.pk and MenuItem.objects.get(pk=self.pk).title != self.title):
+            self.slug = slugify(self.title, allow_unicode=True)
+        super().save(*args, **kwargs)
+
 
     def get_price(self):
         discount_amount = self.price * Decimal(self.discount_percent / 100)
@@ -62,3 +74,12 @@ class MenuItem(models.Model):
     @property
     def is_out_of_stock(self):
         return self.stock == 0
+
+
+class GalleryMenu(models.Model):
+    menu = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name="menu_item")
+    image = models.ImageField(upload_to="gallery/menu_items", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "عکس"
+        verbose_name_plural = "گالری تصاویر"
