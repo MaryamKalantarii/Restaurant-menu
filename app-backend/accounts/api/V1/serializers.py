@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import CustomeUser
+from accounts.models import CustomeUser, Profile
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.shortcuts import get_object_or_404
@@ -155,3 +155,35 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     def save(self, user):
         user.set_password(self.validated_data["new_password1"])
         user.save()
+
+
+class GetUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomeUser
+        fields = ["email"]
+
+
+class UpdateProfileCustomerSerializer(serializers.ModelSerializer):
+    user = GetUserSerializer(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ["id", "user", "first_name", "last_name", "image", "phone_number"]
+
+
+class GetProfileCustomerSerializer(serializers.ModelSerializer):
+    user = GetUserSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ["id", "user", "first_name", "last_name", "phone_number", "image", "created_date", "updated_date"]
+
+
+class AllProfileCustomerSerializer(serializers.ModelSerializer):
+    user = GetUserSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ["id", "user", "first_name", "last_name", "phone_number", "image", "created_date", "updated_date"]
+
+

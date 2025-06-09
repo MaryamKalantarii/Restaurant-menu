@@ -1,19 +1,27 @@
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, UpdateAPIView, RetrieveAPIView, ListAPIView
+from django.http import Http404
 from .serializers import (
         RegistrationSerializer,
         ResendEmailSerializer,
         ChangePasswordSerializer,
         PasswordResetConfirmSerializer,
         PasswordResetRequestSerializer,
+        UpdateProfileCustomerSerializer,
+        GetProfileCustomerSerializer,
+        AllProfileCustomerSerializer
 )
 from rest_framework.response import Response
-from rest_framework import status
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework import status, permissions
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.api.V1.tasks import send_email_with_celery
-from accounts.models import CustomeUser
+from accounts.models import CustomeUser, Profile
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
+from ..V1.paginations import UserListPagination
+
 
 class RegistrationView(GenericAPIView):
     """
@@ -239,3 +247,46 @@ class PasswordResetConfirmView(GenericAPIView):
         serializer.save(user=user)
 
         return Response({"detail": "رمز عبور با موفقیت بازنشانی شد."})
+
+
+class UpdateProfileCustomerAPIView(UpdateAPIView):
+
+    """Update the authenticated user's profile."""
+
+    serializer_class = UpdateProfileCustomerSerializer
+    queryset = Profile.objects.select_related("user")
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        try:
+            return self.queryset.get(user=self.request.user)
+        except Profile.DoesNotExist:
+            raise Http404("پروفایل کاربر یافت نشد")
+
+
+class GetProfileCustomerAPIView(RetrieveAPIView):
+
+    """Retrieve the profile of the authenticated user."""
+
+    queryset = Profile.objects.select_related("user")
+    serializer_class = GetProfileCustomerSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        try:
+            return self.queryset.get(user=self.request.user)
+        except Profile.DoesNotExist:
+            raise Http404("پروفایل کاربر یافت نشد")
+
+
+class AllProfileCustomerAPIView(ListAPIView):
+
+    """List all user profiles (admin access only), with search, ordering, and pagination."""
+    
+    queryset = Profile.objects.select_related("user")
+    serializer_class = AllProfileCustomerSerializer
+    permission_classes = [permissions.IsAdminUser]
+    pagination_class = UserListPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ['first_name', 'last_name', 'phone_number', 'user__email']
+    
