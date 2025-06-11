@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function Menu() {
+  const { t } = useTranslation();
   const [menuItems, setMenuItems] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("starters"); // دسته پیش‌فرض
+  const [activeCategory, setActiveCategory] = useState("starters");
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/menu/api/V1/menu-items/") // آدرس API خودت رو بذار
+    axios.get("http://127.0.0.1:8000/menu/api/V1/menu-items/")
       .then((response) => {
         setMenuItems(response.data);
       })
@@ -15,7 +17,6 @@ function Menu() {
       });
   }, []);
 
-  // گروه‌بندی آیتم‌ها بر اساس دسته‌بندی
   const groupedItems = menuItems.reduce((acc, item) => {
     item.category.forEach((cat) => {
       if (!acc[cat.slug]) acc[cat.slug] = [];
@@ -29,8 +30,11 @@ function Menu() {
   return (
     <section id="menu" className="menu section">
       <div className="container section-title" data-aos="fade-up">
-        <h2>Our Menu</h2>
-        <p><span>Check Our</span> <span className="description-title">Yummy Menu</span></p>
+        <h2>{t("ourMenu")}</h2>
+        <p>
+          <span>{t("checkOur")}</span>{" "}
+          <span className="description-title">{t("yummyMenu")}</span>
+        </p>
       </div>
 
       <div className="container">
@@ -41,7 +45,8 @@ function Menu() {
                 className={`nav-link ${activeCategory === slug ? "active show" : ""}`}
                 onClick={() => setActiveCategory(slug)}
               >
-                <h4>{groupedItems[slug][0]?.category.find((c) => c.slug === slug)?.title || slug}</h4>
+               <h4>{t(`categories.${slug}`)}</h4>
+
               </button>
             </li>
           ))}
@@ -50,8 +55,9 @@ function Menu() {
         <div className="tab-content" data-aos="fade-up" data-aos-delay="200">
           <div className="tab-pane fade active show">
             <div className="tab-header text-center">
-              <p>Menu</p>
-              <h3>{activeCategory}</h3>
+              <p>{t("menu")}</p>
+             <h3>{t(`categories.${activeCategory}`)}</h3>
+
             </div>
 
             <div className="row gy-5">
@@ -62,7 +68,7 @@ function Menu() {
                   </a>
                   <h4>{item.title}</h4>
                   <p className="ingredients">{item.description}</p>
-                  <p className="price">{item.get_price} تومان</p>
+                  <p className="price">{item.get_price} {t("currency")}</p>
                 </div>
               ))}
             </div>

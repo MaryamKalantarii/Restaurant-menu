@@ -95,6 +95,158 @@ body.light-theme .theme-toggle-btn {
 }
 
 /* در صورت نیاز می‌توانید این حالت‌ها را تغییر دهید */
+.language-dropdown {
+  position: relative;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-weight: 600;
+  margin-left: 50px;
+}
+
+.lang-menu {
+  position: absolute;
+  top: 100%;
+  left: 0; /* به طور پیش‌فرض، منو در حالت LTR در سمت چپ قرار می‌گیرد */
+  background: rgba(145, 145, 145, 0.644);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  list-style: none;
+  padding: 5px 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.language-dropdown[dir="rtl"] .lang-menu {
+  left: auto; /* در حالت RTL منو باید به سمت راست قرار گیرد */
+  right: 0; /* منو در سمت راست قرار می‌گیرد */
+}
+
+.lang-menu li {
+  padding: 8px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lang-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.language-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #8f8f8fcb;
+}
+
+.lang-btn.active {
+  font-weight: bold;
+}
+
+.lang-btn:hover {
+  color: #007bff;
+}
+/* استایل برای باکس‌ها */
+/* استایل برای باکس‌ها */
+.why-box {
+  background-color: rgba(255, 255, 255, 0.1); /* پس‌زمینه کمی شفاف در حالت لایت */
+  padding: 20px;
+  border-radius: 10px; /* گوشه‌های گرد */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* خط دور باکس در حالت لایت */
+  color: #000000; /* رنگ متن سیاه در حالت لایت */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* سایه برای تفکیک بهتر */
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.why-box h3 {
+  color: #333333; /* رنگ متن عنوان در باکس */
+  font-size: 1.5rem;
+}
+
+.why-box p {
+  color: #666666; /* رنگ متن پاراگراف‌ها */
+  font-size: 1rem;
+}
+
+.why-box a {
+  color: #ff6347; /* رنگ لینک */
+  text-decoration: none;
+}
+
+.why-box a:hover {
+  text-decoration: underline;
+}
+
+/* استایل برای باکس‌های داخل ردیف */
+.icon-box {
+  background-color: rgba(255, 255, 255, 0.2); /* پس‌زمینه شفاف برای باکس‌ها */
+  padding: 20px;
+  border-radius: 10px; /* گوشه‌های گرد */
+  color: #000000; /* رنگ متن سیاه */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* خط دور باکس */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* سایه برای تفکیک بهتر */
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.icon-box i {
+  font-size: 40px;
+  color: #ff6347; /* رنگ آیکون‌ها */
+  margin-bottom: 15px;
+}
+
+.icon-box h4 {
+  font-size: 1.25rem;
+  color: #333333; /* رنگ عنوان h4 */
+  margin-bottom: 10px;
+}
+
+.icon-box .icon-box-description {
+  color: #666666; /* رنگ متن توضیحات */
+}
+
+/* تغییر رنگ پس‌زمینه در هنگام هاور (لایت) */
+.icon-box:hover, .why-box:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* تغییر رنگ پس‌زمینه در هنگام هاور */
+  color: #000000; /* رنگ متن ثابت می‌ماند */
+}
+
+/* تنظیمات در حالت دارک */
+body.dark-mode .why-box {
+  background-color: rgba(255, 255, 255, 0.1); /* پس‌زمینه سفید در حالت دارک */
+  border: 1px solid #fff; /* خط دور سفید در حالت دارک */
+  color: #fff; /* رنگ متن سفید در حالت دارک */
+}
+
+body.dark-mode .icon-box {
+  background-color: rgba(255, 255, 255, 0.2); /* پس‌زمینه سفید در حالت دارک */
+  color: #fff; /* رنگ متن سفید در حالت دارک */
+  border: 1px solid #fff; /* خط دور سفید در حالت دارک */
+}
+
+body.dark-mode .icon-box:hover, body.dark-mode .why-box:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* تغییر رنگ پس‌زمینه در هنگام هاور در حالت دارک */
+  color: #fff; /* رنگ متن ثابت می‌ماند */
+}
+
+body.dark-mode .icon-box i {
+  color: #ff6347; /* رنگ آیکون‌ها در حالت دارک */
+}
+
+body.dark-mode .icon-box h4, body.dark-mode .icon-box .icon-box-description {
+  color: #fff; /* رنگ متن سفید در حالت دارک */
+}
 
 
 
@@ -102,3 +254,113 @@ body.light-theme .theme-toggle-btn {
 
 
 
+
+
+/* استایل برای حالت لایت */
+.nav-tabs .nav-link {
+  background-color: transparent; /* پس‌زمینه شفاف */
+  color: #000; /* رنگ متن سیاه */
+  border: none; /* بردر معمولی */
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* حالت فعال برای کتگوری‌ها */
+.nav-tabs .nav-link.active {
+  background-color: #ff6347; /* رنگ پس‌زمینه برای کتگوری فعال */
+  color: #fff; /* رنگ متن سفید برای کتگوری فعال */
+  font-weight: bold;
+}
+
+/* استایل برای حالت دارک */
+body.dark-mode .nav-tabs .nav-link {
+  background-color: transparent; /* پس‌زمینه شفاف در حالت دارک */
+  color: #fff; /* رنگ متن سفید */
+}
+
+body.dark-mode .nav-tabs .nav-link.active {
+  background-color: #333; /* رنگ پس‌زمینه برای کتگوری فعال در حالت دارک */
+  color: #fff; /* رنگ متن سفید */
+}
+
+body.dark-mode .tab-header h3 {
+  color: #fff; /* رنگ متن h3 در حالت دارک */
+}
+
+body.dark-mode .tab-header p {
+  color: #ccc; /* رنگ متن p در حالت دارک */
+}
+
+
+
+/* استایل برای بخش تماس در حالت لایت */
+.contact {
+  color: #000; /* رنگ متن سیاه */
+}
+
+.contact .section-title h2 {
+  color: #333; /* رنگ عنوان بخش */
+}
+
+.contact .section-title p {
+  color: #555; /* رنگ توضیحات */
+}
+
+.contact .info-item {
+  border: 1px solid #ddd; /* خط دور برای باکس‌های اطلاعات */
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #838383; /* پس‌زمینه سفید */
+  color: #f7f7f7; /* رنگ متن سیاه */
+}
+
+.contact .info-item i {
+  color: #ff6347; /* رنگ آیکون‌ها */
+}
+
+.contact .php-email-form .form-control {
+
+  color: #000; /* رنگ متن سیاه */
+}
+
+.contact .php-email-form button {
+  background-color: #ff6347; /* رنگ دکمه */
+  color: #000000; /* رنگ متن دکمه سفید */
+}
+
+.contact .php-email-form button:hover {
+  background-color: #e55347; /* رنگ دکمه هنگام هاور */
+}
+
+/* استایل برای بخش تماس در حالت دارک */
+body.dark-mode .contact {
+  color: #000000; /* رنگ متن سفید */
+}
+
+body.dark-mode .contact .section-title h2 {
+  color: #ff0909; /* رنگ عنوان بخش در حالت دارک */
+}
+
+body.dark-mode .contact .section-title p {
+  color: #000000; /* رنگ توضیحات در حالت دارک */
+}
+/* استایل برای فیلدهای ورودی و textarea در فرم */
+body.dark-mode .contact .php-email-form .form-control {
+  background-color: #aaaaaa; /* پس‌زمینه مشکی */
+  border: 1px solid #444; /* خط دور تیره */
+  color: #fff; /* رنگ متن سفید */
+}
+
+/* استایل برای فیلدها هنگام فوکوس */
+body.dark-mode .contact .php-email-form .form-control:focus {
+  background-color: #333; /* پس‌زمینه کمی روشن‌تر هنگام فوکوس */
+  border-color: #ff6347; /* رنگ مرز هنگام فوکوس */
+  color: #fff; /* رنگ متن سفید هنگام فوکوس */
+}
+
+/* استایل برای placeholder (متن راهنما) */
+body.dark-mode .contact .php-email-form .form-control::placeholder {
+  color: #aaa; /* رنگ متن راهنما خاکی کم‌رنگ */
+}

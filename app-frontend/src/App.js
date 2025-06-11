@@ -1,6 +1,7 @@
-// App.js
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext'; // اضافه کردن ThemeProvider
+import { useTranslation } from 'react-i18next';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -16,11 +17,27 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AuthForm from './components/AuthForm';
 import EmailVerified from './components/EmailVerified';
-import './styles/styles.css'; // استایل‌ها
+import './styles/styles.css';
 
 function App() {
+  const { t, i18n } = useTranslation();
+
+  // تغییر زبان
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  // تغییر جهت صفحه بر اساس زبان
+  useEffect(() => {
+    if (i18n.language === 'fa') {
+      document.documentElement.setAttribute('dir', 'rtl');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+    }
+  }, [i18n.language]);
+
   return (
-    <ThemeProvider> {/* ThemeProvider در سطح بالا قرار می‌گیره */}
+    <ThemeProvider>
       <Router>
         <Header />
         <Routes>

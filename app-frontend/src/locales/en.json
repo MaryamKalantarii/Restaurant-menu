@@ -1,0 +1,190 @@
+{
+  "home": "Home",
+  "aboutYummy": "About Us",
+  "menuu": "Menu",
+  "eveents": "Events",
+  "chefsTitle": "Our Chefs",
+  "gallerry": "Gallery",
+  "contactt": "Contact Us",
+  "login": "Login",
+  "bookTable": "Book a Table",
+  "aboutSection": {
+    "title": "About Us",
+    "learnMore": "Learn More",
+    "descriptionTitle": "About Us",
+    "bookTable": "Book a Table",
+    "phone": "+1 5589 55488 55",
+    "description": "Lorem ipsum is a dummy text used in printing industry.",
+    "bullet1": "Providing professional and high-quality services for customers.",
+    "bullet2": "A cozy place with delicious food.",
+    "bullet3": "Fresh and healthy ingredients for your wellbeing.",
+    "finalText": "We always strive to be the best."
+  },
+  "chefs": {
+    "title": "Our Chefs",
+    "our": "Our",
+    "professional": "Professional Chefs",
+    "walter": "Walter White",
+    "masterChef": "Head Chef",
+    "walterDescription": "A chef with years of experience in modern cuisine.",
+    "sarah": "Sarah Johnson",
+    "patissier": "Pastry Chef",
+    "sarahDescription": "Expert in creative and delicious desserts.",
+    "william": "William Anderson",
+    "cook": "Cook",
+    "williamDescription": "Skilled in preparing traditional and authentic dishes."
+  },
+  "hero": {
+    "title": "Enjoy Your Healthy and Delicious Meal",
+    "subtitle": "We are a creative web design team using Bootstrap",
+    "watchVideo": "Watch Video"
+  },
+  "about": {
+    "title": "About Us",
+    "learnMore": "Learn More",
+    "paragraph1": "We’ve created a warm and cozy space to offer the best dining experience.",
+    "list1": "Using fresh and high-quality ingredients.",
+    "list2": "Excellent customer service.",
+    "list3": "A peaceful, family-friendly atmosphere.",
+    "paragraph2": "We care about your satisfaction and always aim to improve."
+  },
+  "testimonials": "Testimonials",
+  "whatTheySay": "What Customers",
+  "sayingAboutUs": "Say About Us",
+  "testimonial_1_name": "Saul Goodman",
+  "testimonial_1_title": "CEO & Founder",
+  "testimonial_1_text": "Outstanding service and quality food. Will definitely come back.",
+  "testimonial_2_name": "Sara Wilson",
+  "testimonial_2_title": "Designer",
+  "testimonial_2_text": "Beautiful decor and excellent dishes. One of my best experiences.",
+  "testimonial_3_name": "Jena Karlis",
+  "testimonial_3_title": "Store Owner",
+  "testimonial_3_text": "Everything was great! I’ll definitely recommend it to my friends.",
+  "testimonial_4_name": "John Larson",
+  "testimonial_4_title": "Entrepreneur",
+  "testimonial_4_text": "Healthy, tasty food and a calm atmosphere. A perfect experience.",
+  "ourMenu": "Our Menu",
+  "checkOur": "Check Our",
+  "yummyMenu": "Yummy Menu",
+  "menu": "Menu",
+  "currency": "Toman",
+  "categories.breakfast": "Breakfast",
+  "categories.lunch": "Lunch",
+  "categories.dinner": "Dinner",
+  "categories.starters": "Starters",
+  "categories.special": "Chef's Special",
+  "contact": {
+    "title": "Contact Us",
+    "needHelp": "Need Help?",
+    "contactUs": "Get in Touch",
+    "addressTitle": "Address",
+    "address": "108 Adam Street, New York, NY",
+    "callUs": "Call Us",
+    "emailUs": "Email Us",
+    "openingHours": "Opening Hours",
+    "days": "Monday to Saturday:",
+    "sunday": "Sunday:",
+    "closed": "Closed",
+    "yourName": "Your Name",
+    "yourEmail": "Your Email",
+    "subject": "Subject",
+    "message": "Message",
+    "loading": "Sending...",
+    "sentMessage": "Your message has been sent. Thank you!",
+    "sendMessage": "Send Message"
+  },
+  "events": {
+    "customParties": {
+      "title": "Custom Parties",
+      "price": "$99",
+      "description": "Tailored services with full details for your special occasions..."
+    },
+    "privateParties": {
+      "title": "Private Parties",
+      "price": "$289",
+      "description": "Special planning and full facilities for private events..."
+    },
+    "birthdayParties": {
+      "title": "Birthday Parties",
+      "price": "$499",
+      "description": "Create a memorable day with cake, decor, and fun planning..."
+    },
+    "weddingParties": {
+      "title": "Wedding Parties",
+      "price": "$899",
+      "description": "A dreamy and elegant ceremony for your special day..."
+    }
+  },
+  "reservation": {
+  "title": "Book a Table",
+  "subtitle": "Book Your Stay With Us",
+  "name": "Your Name",
+  "email": "Your Email",
+  "phone": "Your Phone",
+  "date": "Date",
+  "time": "Time",
+  "people": "# of people",
+  "message": "Message",
+  "loading": "Loading",
+  "error": "There was an error. Please try again.",
+  "success": "Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!",
+  "button": "Book a Table"
+},
+"gallery": {
+    "title": "Gallery",
+    "description": "Check Our Gallery"
+  },
+  
+  "whyUs": {
+    "title": "Why Choose Yummy",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.",
+    "learnMore": "Learn More",
+    "iconBoxes": [
+      {
+        "title": "Corporis voluptates officia eiusmod",
+        "description": "Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip"
+      },
+      {
+        "title": "Ullamco laboris ladore lore pan",
+        "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt"
+      },
+      {
+        "title": "Labore consequatur incidid dolore",
+        "description": "Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere"
+      }
+    ]
+  },
+
+  
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "message": {
+      "loginSuccess": "✅ Logged in successfully",
+      "registrationSuccess": "✅ Check your email for confirmation.",
+      "error": "❌ An error occurred."
+    },
+    "toggleForm": {
+      "needAccount": "Need an account? Register",
+      "haveAccount": "Have an account? Login"
+    }
+  },
+  
+  "stats": {
+    "clients": "Clients",
+    "projects": "Projects",
+    "hoursOfSupport": "Hours Of Support",
+    "workers": "Workers"
+  }
+}
+
+
+
+
+
+
+
+
