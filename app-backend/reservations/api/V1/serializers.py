@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from ...models import Reservation
 from datetime import datetime, time
-from accounts.api.V1.serializers import GetUserSerializer
+from dashboard.admin.api.V1.serializers import GetUserSerializer
 
 
 class ReservationSerializer(serializers.ModelSerializer):
@@ -21,10 +21,3 @@ class ReservationSerializer(serializers.ModelSerializer):
         
         return data
     
-
-class CustomerReservationSerializer(serializers.ModelSerializer):
-    user = GetUserSerializer(read_only=True)
-    
-    class Meta:
-        model = Reservation
-        fields = '__all__'

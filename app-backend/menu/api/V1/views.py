@@ -1,20 +1,11 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from .serializers import CategorySerializer, CreateMenuItemSerializer, GetMenuItemSerializer,\
-                             UpdateMenuSerializer, CreateCategorySerializer, UpdateCategorySerializer
+from .serializers import CategorySerializer, GetMenuItemSerializer
 from menu.models import MenuItem, Category
 from ...api.V1.paginations import MenuItemPagination
 
 
-
-class CreateMenuItemAPIView(generics.CreateAPIView):
-
-    """Create a new menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = CreateMenuItemSerializer
-    permission_classes = [permissions.IsAdminUser]
 
 
 class GetListItemMenuAPIView(generics.ListAPIView):
@@ -41,33 +32,6 @@ class GetItemMenuAPIView(generics.RetrieveAPIView):
 
 
 
-class UpdateMenuAPIView(generics.UpdateAPIView):
-
-    """Update a menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = UpdateMenuSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class RemoveMenuAPIView(generics.DestroyAPIView):
-
-    """Delete a menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = UpdateMenuSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class CreateCategoryMenuAPIView(generics.CreateAPIView):
-
-    """Create a new category (admin only)."""
-
-    queryset = Category.objects.all()
-    serializer_class = CreateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
 class GetListCategoryMenuAPIView(generics.ListAPIView):
 
     """List all categories with search and ordering."""
@@ -87,21 +51,3 @@ class GetCategoryMenuAPIView(generics.RetrieveAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_field = "slug"
-
-
-class UpdateCategoryMenuAPIView(generics.UpdateAPIView):
-
-    """Update a category (admin only)."""
-
-    queryset = Category.objects.all()
-    serializer_class = UpdateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class RemoveCategoryMenuAPIView(generics.DestroyAPIView):
-
-    """Delete a category (admin only)."""
-    
-    queryset = Category.objects.all()
-    serializer_class = UpdateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]

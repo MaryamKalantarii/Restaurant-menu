@@ -1,26 +1,19 @@
-from rest_framework.generics import GenericAPIView, UpdateAPIView, RetrieveAPIView, ListAPIView
-from django.http import Http404
+from rest_framework.generics import GenericAPIView
 from .serializers import (
         RegistrationSerializer,
         ResendEmailSerializer,
         ChangePasswordSerializer,
         PasswordResetConfirmSerializer,
         PasswordResetRequestSerializer,
-        UpdateProfileCustomerSerializer,
-        GetProfileCustomerSerializer,
-        AllProfileCustomerSerializer
 )
 from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework import status, permissions
+from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.api.V1.tasks import send_email_with_celery
-from accounts.models import CustomeUser, Profile
+from accounts.models import CustomeUser
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
-from ..V1.paginations import UserListPagination
 
 
 class RegistrationView(GenericAPIView):
@@ -65,6 +58,7 @@ class RegistrationView(GenericAPIView):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
     
+
 class IsVerifiedView(GenericAPIView):
     """
     Handles email verification using a JWT token.
@@ -75,6 +69,9 @@ class IsVerifiedView(GenericAPIView):
     - Returns a success message if verification is successful.
     - Returns an error message if the token is invalid or expired.
     """
+
+    serializer_class = RegistrationSerializer
+    
     def get(self, request, *args, **kwargs):
         try:
             user_data = AccessToken(kwargs.get("token"))
@@ -133,8 +130,6 @@ class ResendEmailView(GenericAPIView):
         return str(refresh.access_token)
 
 
-
-
 class ChangePasswordView(GenericAPIView):
     """
     Handles API endpoint that allows authenticated users to change their password.
@@ -167,7 +162,6 @@ class ChangePasswordView(GenericAPIView):
             {"detail": "رمز عبور با موفقیت تغییر کرد."},
             status=status.HTTP_200_OK
         )
-
 
 
 class PasswordResetRequestView(GenericAPIView):
@@ -211,6 +205,7 @@ class PasswordResetRequestView(GenericAPIView):
 
         return Response({"detail": "لینک تغییر رمز عبور به ایمیل شما ارسال شد."})
 
+
 class PasswordResetConfirmView(GenericAPIView):
     """
     Handles password reset confirmation using a JWT token.
@@ -248,45 +243,4 @@ class PasswordResetConfirmView(GenericAPIView):
 
         return Response({"detail": "رمز عبور با موفقیت بازنشانی شد."})
 
-
-class UpdateProfileCustomerAPIView(UpdateAPIView):
-
-    """Update the authenticated user's profile."""
-
-    serializer_class = UpdateProfileCustomerSerializer
-    queryset = Profile.objects.select_related("user")
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_object(self):
-        try:
-            return self.queryset.get(user=self.request.user)
-        except Profile.DoesNotExist:
-            raise Http404("پروفایل کاربر یافت نشد")
-
-
-class GetProfileCustomerAPIView(RetrieveAPIView):
-
-    """Retrieve the profile of the authenticated user."""
-
-    queryset = Profile.objects.select_related("user")
-    serializer_class = GetProfileCustomerSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_object(self):
-        try:
-            return self.queryset.get(user=self.request.user)
-        except Profile.DoesNotExist:
-            raise Http404("پروفایل کاربر یافت نشد")
-
-
-class AllProfileCustomerAPIView(ListAPIView):
-
-    """List all user profiles (admin access only), with search, ordering, and pagination."""
-    
-    queryset = Profile.objects.select_related("user")
-    serializer_class = AllProfileCustomerSerializer
-    permission_classes = [permissions.IsAdminUser]
-    pagination_class = UserListPagination
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['first_name', 'last_name', 'phone_number', 'user__email']
     
