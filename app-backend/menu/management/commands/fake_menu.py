@@ -62,7 +62,7 @@ class Command(BaseCommand):
                     title=title,
                     slug=slug,
                     description=description,
-                    image1=image_file,
+                    image=image_file,
                     stock=random.randint(0, 20),
                     status=1,  # Published
                     price=random.randint(50000, 200000),

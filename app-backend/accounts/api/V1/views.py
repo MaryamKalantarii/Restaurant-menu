@@ -15,6 +15,7 @@ from accounts.models import CustomeUser
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
 
+
 class RegistrationView(GenericAPIView):
     """
     Handles user registration.
@@ -57,6 +58,7 @@ class RegistrationView(GenericAPIView):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
     
+
 class IsVerifiedView(GenericAPIView):
     """
     Handles email verification using a JWT token.
@@ -67,6 +69,9 @@ class IsVerifiedView(GenericAPIView):
     - Returns a success message if verification is successful.
     - Returns an error message if the token is invalid or expired.
     """
+
+    serializer_class = RegistrationSerializer
+    
     def get(self, request, *args, **kwargs):
         try:
             user_data = AccessToken(kwargs.get("token"))
@@ -122,8 +127,6 @@ class ResendEmailView(GenericAPIView):
         return str(refresh.access_token)
 
 
-
-
 class ChangePasswordView(GenericAPIView):
     """
     Handles API endpoint that allows authenticated users to change their password.
@@ -156,7 +159,6 @@ class ChangePasswordView(GenericAPIView):
             {"detail": "رمز عبور با موفقیت تغییر کرد."},
             status=status.HTTP_200_OK
         )
-
 
 
 class PasswordResetRequestView(GenericAPIView):
@@ -200,6 +202,7 @@ class PasswordResetRequestView(GenericAPIView):
 
         return Response({"detail": "لینک تغییر رمز عبور به ایمیل شما ارسال شد."})
 
+
 class PasswordResetConfirmView(GenericAPIView):
     """
     Handles password reset confirmation using a JWT token.
@@ -236,3 +239,5 @@ class PasswordResetConfirmView(GenericAPIView):
         serializer.save(user=user)
 
         return Response({"detail": "رمز عبور با موفقیت بازنشانی شد."})
+
+    

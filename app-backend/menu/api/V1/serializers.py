@@ -1,21 +1,30 @@
 from rest_framework import serializers
 from ...models import MenuItem, Category
+from dashboard.admin.api.V1.serializers import GalleryMenuSerializer
 
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
+    """Serialize category data for listing and detail views."""
+
     class Meta:
         model = Category
         fields = ['id', 'title', 'slug']
 
 
-class MenuItemSerializer(serializers.ModelSerializer):
+
+class GetMenuItemSerializer(serializers.ModelSerializer):
+
+    """Serialize menu item for listing and detail, with extra computed fields."""
+    
     category = CategorySerializer(many=True, read_only=True)
     detail_link = serializers.SerializerMethodField()
     get_price = serializers.SerializerMethodField()
     is_discounted = serializers.BooleanField(read_only=True)
     is_published = serializers.BooleanField(read_only=True)
     is_out_of_stock = serializers.BooleanField(read_only=True)
+    menu_item = GalleryMenuSerializer(many=True)
 
     class Meta:
         model = MenuItem
@@ -26,8 +35,8 @@ class MenuItemSerializer(serializers.ModelSerializer):
             'title',
             'slug',
             'description',
-            'image1',
-            'image2',
+            'image',
+            'menu_item',
             'stock',
             'status',
             'price',

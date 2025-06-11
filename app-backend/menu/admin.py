@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MenuItem, Category
+from .models import MenuItem, Category, GalleryMenu
 
 
 @admin.register(Category)
@@ -23,7 +23,7 @@ class MenuItemAdmin(admin.ModelAdmin):
             "fields": ("title", "slug", "description", "category", "user")
         }),
         ("تصاویر", {
-            "fields": ("image1", "image2")
+            "fields": ("image",)
         }),
         ("وضعیت و قیمت", {
             "fields": ("price", "discount_percent", "stock", "status", "is_featured")
@@ -32,3 +32,6 @@ class MenuItemAdmin(admin.ModelAdmin):
             "fields": ("views", "preparation_time", "created_date", "updated_date")
         }),
     )
+
+
+admin.site.register(GalleryMenu)

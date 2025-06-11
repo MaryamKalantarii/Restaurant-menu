@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'menu',
     'reservations',
     'accounts',
+    "dashboard",
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
