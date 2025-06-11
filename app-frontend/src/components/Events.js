@@ -1,34 +1,37 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useTranslation } from 'react-i18next';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 function Events() {
+  const { t } = useTranslation();
+
   const slides = [
     {
-      title: "Custom Parties",
-      price: "$99",
-      img: "/assets/img/events-1.jpg",
-      description: "Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.",
+      title: t('events.customParties.title'),
+      price: t('events.customParties.price'),
+      img: '/assets/img/events-1.jpg',
+      description: t('events.customParties.description'),
     },
     {
-      title: "Private Parties",
-      price: "$289",
-      img: "/assets/img/events-2.jpg",
-      description: "In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus...",
+      title: t('events.privateParties.title'),
+      price: t('events.privateParties.price'),
+      img: '/assets/img/events-2.jpg',
+      description: t('events.privateParties.description'),
     },
     {
-      title: "Birthday Parties",
-      price: "$499",
-      img: "/assets/img/events-3.jpg",
-      description: "Laborum aperiam atque omnis minus omnis est qui assumenda quos...",
+      title: t('events.birthdayParties.title'),
+      price: t('events.birthdayParties.price'),
+      img: '/assets/img/events-3.jpg',
+      description: t('events.birthdayParties.description'),
     },
     {
-      title: "Wedding Parties",
-      price: "$899",
-      img: "/assets/img/events-4.jpg",
-      description: "Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.",
+      title: t('events.weddingParties.title'),
+      price: t('events.weddingParties.price'),
+      img: '/assets/img/events-4.jpg',
+      description: t('events.weddingParties.description'),
     },
   ];
 

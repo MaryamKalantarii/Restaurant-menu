@@ -1,21 +1,18 @@
 import React from "react";
+import { useTranslation } from 'react-i18next'; // ایمپورت useTranslation
 
 function Chefs() {
+  const { t } = useTranslation(); // استفاده از useTranslation
 
   return (
-
     <section id="chefs" className="chefs section">
-
-
       <div className="container section-title" data-aos="fade-up">
-        <h2>chefs</h2>
-        <p><span>Our</span> <span className="description-title">Proffesional Chefs</span></p>
+        <h2>{t('chefs.title')}</h2> {/* ترجمه عنوان Chefs */}
+        <p><span>{t('chefs.our')}</span> <span className="description-title">{t('chefs.professional')}</span></p>
       </div>
 
       <div className="container">
-
         <div className="row gy-4">
-
           <div className="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div className="team-member">
               <div className="member-img">
@@ -28,9 +25,9 @@ function Chefs() {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Walter White</h4>
-                <span>Master Chef</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+                <h4>{t('chefs.walter')}</h4> {/* ترجمه نام Chef */}
+                <span>{t('chefs.masterChef')}</span> {/* ترجمه سمت */}
+                <p>{t('chefs.walterDescription')}</p> {/* ترجمه توضیحات */}
               </div>
             </div>
           </div>
@@ -47,9 +44,9 @@ function Chefs() {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Patissier</span>
-                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
+                <h4>{t('chefs.sarah')}</h4> {/* ترجمه نام Chef */}
+                <span>{t('chefs.patissier')}</span> {/* ترجمه سمت */}
+                <p>{t('chefs.sarahDescription')}</p> {/* ترجمه توضیحات */}
               </div>
             </div>
           </div>
@@ -66,22 +63,16 @@ function Chefs() {
                 </div>
               </div>
               <div className="member-info">
-                <h4>William Anderson</h4>
-                <span>Cook</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
+                <h4>{t('chefs.william')}</h4> {/* ترجمه نام Chef */}
+                <span>{t('chefs.cook')}</span> {/* ترجمه سمت */}
+                <p>{t('chefs.williamDescription')}</p> {/* ترجمه توضیحات */}
               </div>
             </div>
           </div>
 
         </div>
-
       </div>
-
     </section>
-
-
-
-
   );
 }
 

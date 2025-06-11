@@ -1,14 +1,17 @@
 import React from 'react';
 import CountUp from 'react-countup';
+import { useTranslation } from 'react-i18next';
 
 const stats = [
-  { end: 232, label: 'Clients' },
-  { end: 521, label: 'Projects' },
-  { end: 1453, label: 'Hours Of Support' },
-  { end: 32, label: 'Workers' },
+  { end: 232, label: 'clients' },   // تغییر نام‌ها به کلیدهای ترجمه
+  { end: 521, label: 'projects' },
+  { end: 1453, label: 'hoursOfSupport' },
+  { end: 32, label: 'workers' },
 ];
 
 function Stats() {
+  const { t } = useTranslation(); // برای استفاده از ترجمه‌ها
+
   return (
     <section id="stats" className="stats section dark-background">
       <img src="/assets/img/stats-bg.jpg" alt="" data-aos="fade-in" />
@@ -21,7 +24,7 @@ function Stats() {
                 <span className="purecounter">
                   <CountUp end={item.end} duration={1.5} />
                 </span>
-                <p>{item.label}</p>
+                <p>{t(`stats.${item.label}`)}</p>  {/* استفاده از کلید ترجمه */}
               </div>
             </div>
           ))}

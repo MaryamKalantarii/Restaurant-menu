@@ -9,7 +9,9 @@ const ThemeToggle = () => {
       onClick={toggleTheme} 
       className={`theme-toggle-btn m-3 ${theme === 'dark' ? 'btn-dark' : 'btn-light'}`}
     >
-      {theme === 'dark' ? '☀' : '🌙'}
+      <span style={{ color: theme === 'dark' ? 'yellow' : 'gray' }}>
+        {theme === 'dark' ? '🌕' : '🌙'}
+      </span>
     </button>
   );
 };
