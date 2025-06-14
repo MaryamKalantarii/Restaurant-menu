@@ -32,8 +32,11 @@ function AuthForm() {
           password: formData.password,
         });
 
-        const token = response.data.access;
-        localStorage.setItem('token', token); // ذخیره توکن
+        const { access, refresh } = response.data;
+        console.log('Login Response:', response.data);
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
+        console.log('Token saved in localStorage:', localStorage.getItem('access'));
         setMessage(t('auth.message.loginSuccess'));
         setMessageType('success'); // نوع پیام موفقیت
 

@@ -1,23 +1,21 @@
-# reservations/serializers.py
 from rest_framework import serializers
-from ...models import Reservation
+from reservations.models import Reservation
 from datetime import datetime, time
 from dashboard.admin.api.V1.serializers import GetUserSerializer
-
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ['id', 'name', 'date', 'time', 'people', 'email', 'phone']
+        read_only_fields = ['id', 'email', 'phone']  # این دو تا فقط از سمت سرور تنظیم می‌شن
 
     def validate(self, data):
-        # بررسی تاریخ گذشته
         if data['date'] < datetime.today().date():
             raise serializers.ValidationError("تاریخ رزرو نمی‌تواند در گذشته باشد.")
         
-        # بررسی ساعت کاری (مثلاً 12:00 تا 22:00)
         if not time(12, 0) <= data['time'] <= time(22, 0):
             raise serializers.ValidationError("رزرو فقط بین ساعت 12 تا 22 ممکن است.")
         
         return data
+
     

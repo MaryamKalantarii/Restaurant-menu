@@ -170,7 +170,7 @@ SIMPLE_JWT = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp4dev'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
@@ -179,7 +179,7 @@ EMAIL_HOST_PASSWORD = ''
 
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/1'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
