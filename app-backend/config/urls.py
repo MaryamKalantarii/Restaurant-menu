@@ -40,7 +40,7 @@ urlpatterns = [
     path('menu/api/V1/', include('menu.api.V1.urls')),
     path('reservations/api/V1/', include('reservations.api.V1.urls')),
     path('accounts/api/V1/', include('accounts.api.V1.urls')),    
-    path('dashboard/', include('dashboard.urls')),  
+    path('dashboard/api/V1/', include('dashboard.urls')),  
     path('api-auth/', include('rest_framework.urls')),
     
 
