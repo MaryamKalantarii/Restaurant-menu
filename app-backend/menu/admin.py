@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MenuItem, Category, GalleryMenu
+from .models import MenuItem, Category
 
 
 @admin.register(Category)
@@ -34,4 +34,4 @@ class MenuItemAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(GalleryMenu)
+

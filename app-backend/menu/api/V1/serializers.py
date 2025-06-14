@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from ...models import MenuItem, Category
-from dashboard.admin.api.V1.serializers import GalleryMenuSerializer
-
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -14,7 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 
-class GetMenuItemSerializer(serializers.ModelSerializer):
+class MenuItemSerializer(serializers.ModelSerializer):
 
     """Serialize menu item for listing and detail, with extra computed fields."""
     
@@ -24,7 +22,6 @@ class GetMenuItemSerializer(serializers.ModelSerializer):
     is_discounted = serializers.BooleanField(read_only=True)
     is_published = serializers.BooleanField(read_only=True)
     is_out_of_stock = serializers.BooleanField(read_only=True)
-    menu_item = GalleryMenuSerializer(many=True)
 
     class Meta:
         model = MenuItem
@@ -36,7 +33,6 @@ class GetMenuItemSerializer(serializers.ModelSerializer):
             'slug',
             'description',
             'image',
-            'menu_item',
             'stock',
             'status',
             'price',
@@ -57,7 +53,7 @@ class GetMenuItemSerializer(serializers.ModelSerializer):
     def get_detail_link(self, obj):
         request = self.context.get('request')
         if request:
-            return request.build_absolute_uri(f'/api/v1/menu/{obj.slug}/')  
+            return request.build_absolute_uri(f'/api/V1/menu/{obj.slug}/')  
 
     def get_get_price(self, obj):
         return obj.get_price()  

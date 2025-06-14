@@ -1,12 +1,12 @@
-from django.urls import path, re_path
-from .views import *
+from django.urls import path, include
+from .views import *  
+from rest_framework.routers import DefaultRouter
 
 
-app_name = 'api-v1-menu'
+app_name='api-V1-menu'
 
-urlpatterns = [
-    path("all_menu/", GetListItemMenuAPIView.as_view(), name="all_menu"),
-    re_path(r'^(?P<slug>[-\wآ-ی]+)/get_menu/', GetItemMenuAPIView.as_view(), name='get_menu'),
-    path("all_category/", GetListCategoryMenuAPIView.as_view(), name="all_category"),
-    re_path(r'^(?P<slug>[-\wآ-ی]+)/get_category/', GetCategoryMenuAPIView.as_view(), name='get_category'),
-]
+router = DefaultRouter()
+router.register('menu-items', MenuItemView, basename='menu-items') 
+router.register('categories', CategoryView, basename='categories')
+
+urlpatterns = router.urls

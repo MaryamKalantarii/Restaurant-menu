@@ -63,8 +63,8 @@ function Menu() {
             <div className="row gy-5">
               {groupedItems[activeCategory]?.map((item) => (
                 <div className="col-lg-4 menu-item" key={item.id}>
-                  <a href={item.image1} className="glightbox">
-                    <img src={item.image1} className="menu-img img-fluid" alt={item.title} />
+                  <a href={item.image} className="glightbox">
+                    <img src={item.image} className="menu-img img-fluid" alt={item.title} />
                   </a>
                   <h4>{item.title}</h4>
                   <p className="ingredients">{item.description}</p>

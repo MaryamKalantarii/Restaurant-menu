@@ -1,53 +1,39 @@
-from rest_framework import generics
+from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from .serializers import CategorySerializer, GetMenuItemSerializer
-from menu.models import MenuItem, Category
-from ...api.V1.paginations import MenuItemPagination
+from .serializers import MenuItemSerializer, CategorySerializer 
+from .permisstions import IsAdminAndVerifiedOrReadOnly
+from menu.models import MenuItem, Category, ProductStatusType
 
 
 
 
-class GetListItemMenuAPIView(generics.ListAPIView):
 
-    """List all menu items with pagination, filtering, search, and ordering."""
+class MenuItemView(viewsets.ModelViewSet):
 
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = GetMenuItemSerializer
-    pagination_class = MenuItemPagination
+    queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
+    serializer_class = MenuItemSerializer 
+    permission_classes = [IsAdminAndVerifiedOrReadOnly]
+    lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category']
     search_fields = ['description', 'category__title']
     ordering_fields = ['created_date', 'price']
     ordering = ['-created_date']
-
-
-class GetItemMenuAPIView(generics.RetrieveAPIView):
-
-    """Retrieve a single menu item by slug."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = GetMenuItemSerializer
-    lookup_field = "slug"
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 
-class GetListCategoryMenuAPIView(generics.ListAPIView):
 
-    """List all categories with search and ordering."""
+
+class CategoryView(viewsets.ModelViewSet):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdminAndVerifiedOrReadOnly]
+    lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title']
     ordering_fields = ['title']
     ordering = ['title']
-
-
-class GetCategoryMenuAPIView(generics.RetrieveAPIView):
-
-    """Retrieve a single category by slug."""
-
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    lookup_field = "slug"

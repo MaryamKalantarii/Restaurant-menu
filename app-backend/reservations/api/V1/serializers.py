@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from reservations.models import Reservation
 from datetime import datetime, time
-from dashboard.admin.api.V1.serializers import GetUserSerializer
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
