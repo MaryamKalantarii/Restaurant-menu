@@ -364,3 +364,122 @@ body.dark-mode .contact .php-email-form .form-control:focus {
 body.dark-mode .contact .php-email-form .form-control::placeholder {
   color: #aaa; /* رنگ متن راهنما خاکی کم‌رنگ */
 }
+.team-member {
+  background: rgba(255, 255, 255, 0.1); /* حالت شیشه‌ای */
+  border-radius: 20px; /* گردی بیشتر */
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* فیلتر شیشه‌ای */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* سایه نرم */
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-10px); /* بالا رفتن */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* سایه بزرگ‌تر */
+  background: rgba(255, 255, 255, 0.2); /* تغییر شفافیت پس‌زمینه */
+}
+
+.member-img {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.member-img img {
+  width: 100%;
+  border-radius: 0; /* عکس گرد نباشه */
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-img img {
+  transform: scale(1.1); /* بزرگتر شدن تصویر */
+}
+
+.member-info {
+  padding: 25px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.3); /* شفافیت بیشتر */
+  backdrop-filter: blur(8px); /* فیلتر شیشه‌ای روی اطلاعات */
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.member-info h4 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #fff; /* رنگ روشن */
+}
+
+.member-info .chef-role {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #ddd;
+}
+
+.member-info p {
+  font-size: 14px;
+  color: #fff;
+}
+
+/* آیکون‌های شبکه اجتماعی */
+.social a {
+  margin: 0 10px;
+  display: inline-block;
+  font-size: 18px;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+.social a:hover {
+  color: #ff0066; /* رنگ جذاب برای هاور */
+}
+
+/* دارک مود */
+body.dark-theme .team-member {
+  background: rgba(50, 50, 50, 0.6); /* حالت شیشه‌ای تیره */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme .member-info {
+  background-color: rgba(30, 30, 30, 0.5);
+  backdrop-filter: blur(8px);
+  color: #eee;
+}
+
+body.dark-theme .member-info h4 {
+  color: #fff;
+}
+
+body.dark-theme .member-info .chef-role {
+  color: #ccc;
+}
+
+body.dark-theme .member-info p {
+  color: #ddd;
+}
+
+body.dark-theme .social a {
+  color: #bbb;
+}
+
+body.dark-theme .social a:hover {
+  color: #ff0066;
+}
+
+.icon-button {
+  background-color: #77777779;
+  border: none;
+  padding: 0;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: inherit;
+  transition: color 0.3s ease;
+
+}
+
+.icon-button:hover {
+  color: #ff0000; /* رنگ دلخواه برای hover */
+}
