@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.models import CustomeUser, Profile
-
+from reservations.models import Reservation
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -31,3 +31,12 @@ class CustomeUserSerializer(serializers.ModelSerializer):
             profile.save()
 
         return user
+
+class AdminReservationSerializer(serializers.ModelSerializer):
+    user_email = serializers.SerializerMethodField()
+    class Meta:
+        model = Reservation
+        fields = ['id','user', 'user_email', 'date', 'time', 'people']
+
+    def get_user_email(self, obj):
+        return obj.user.email
