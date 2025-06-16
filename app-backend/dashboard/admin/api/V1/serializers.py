@@ -1,36 +1,6 @@
 from rest_framework import serializers
 from accounts.models import CustomeUser, Profile
 from reservations.models import Reservation
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['id', 'first_name', 'last_name', 'image', 'phone_number', 'created_date', 'updated_date']
-
-class CustomeUserSerializer(serializers.ModelSerializer):
-    user_profile = ProfileSerializer()
-
-    class Meta:
-        model = CustomeUser
-        fields = ['id', 'email', 'is_active', 'is_staff', 'is_superuser',
-                  'is_verified', 'type', 'created_date', 'updated_date', 'user_profile']
-
-    def create(self, validated_data):
-        profile_data = validated_data.pop('user_profile')
-        user = CustomeUser.objects.create(**validated_data)
-        Profile.objects.create(user=user, **profile_data)
-        return user
-
-    def update(self, instance, validated_data):
-        profile_data = validated_data.pop('user_profile', None)
-        user = super().update(instance, validated_data)
-
-        if profile_data:
-            profile = user.user_profile
-            for attr, value in profile_data.items():
-                setattr(profile, attr, value)
-            profile.save()
-
-        return user
 
 class AdminReservationSerializer(serializers.ModelSerializer):
     user_email = serializers.SerializerMethodField()
@@ -40,3 +10,36 @@ class AdminReservationSerializer(serializers.ModelSerializer):
 
     def get_user_email(self, obj):
         return obj.user.email
+
+
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+from accounts.models import Profile  # اگر پروفایل جداست
+
+User = get_user_model()
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'phone_number', 'image']
+
+class AdminUserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'is_active', 'is_staff', 'profile']
+
+    def update(self, instance, validated_data):
+        # آپدیت یوزر و پروفایل با هم
+        profile_data = validated_data.pop('profile', {})
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        profile = instance.profile
+        for attr, value in profile_data.items():
+            setattr(profile, attr, value)
+        profile.save()
+
+        return instance

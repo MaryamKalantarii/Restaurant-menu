@@ -1,11 +1,13 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser
-from accounts.models import CustomeUser
 from reservations.models import Reservation
-from .serializers import CustomeUserSerializer
-from rest_framework import generics, permissions
+from rest_framework import permissions
 from reservations.models import Reservation
-from .serializers import AdminReservationSerializer
+from .serializers import AdminReservationSerializer,AdminUserSerializer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 class IsAdminUser(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -16,8 +18,11 @@ class AdminReservationCreateView(ModelViewSet):
     serializer_class = AdminReservationSerializer
     permission_classes = [IsAdminUser]
 
+
+
 class AdminUserViewSet(ModelViewSet):
-    queryset = CustomeUser.objects.select_related('user_profile').all()
-    serializer_class = CustomeUserSerializer
+    queryset = User.objects.all().select_related('profile')
+    serializer_class = AdminUserSerializer
     permission_classes = [IsAdminUser]
+
 

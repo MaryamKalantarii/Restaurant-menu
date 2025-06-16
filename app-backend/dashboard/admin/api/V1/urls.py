@@ -3,9 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import AdminUserViewSet,AdminReservationCreateView
 
 router = DefaultRouter()
-router.register('admin/users', AdminUserViewSet, basename='admin-users'),
 router.register('admin/reservation', AdminReservationCreateView, basename='reservation')
-
+router.register('admin/users', AdminUserViewSet, basename='admin-users')
 urlpatterns = router.urls
 
 # urlpatterns = [
@@ -14,4 +13,6 @@ urlpatterns = router.urls
 # ]
 
 
+
+   
 
