@@ -1,39 +1,18 @@
-from rest_framework import viewsets, filters
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
 from .serializers import MenuItemSerializer, CategorySerializer 
-from .permisstions import IsAdminAndVerifiedOrReadOnly
 from menu.models import MenuItem, Category, ProductStatusType
+from rest_framework.generics import ListAPIView
 
 
 
 
-
-class MenuItemView(viewsets.ModelViewSet):
+class MenuItemView(ListAPIView):
 
     queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
     serializer_class = MenuItemSerializer 
-    permission_classes = [IsAdminAndVerifiedOrReadOnly]
-    lookup_field = 'slug'
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['category']
-    search_fields = ['description', 'category__title']
-    ordering_fields = ['created_date', 'price']
-    ordering = ['-created_date']
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 
-
-
-
-class CategoryView(viewsets.ModelViewSet):
+class CategoryView(ListAPIView):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAdminAndVerifiedOrReadOnly]
-    lookup_field = 'slug'
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['title']
-    ordering_fields = ['title']
-    ordering = ['title']
+  

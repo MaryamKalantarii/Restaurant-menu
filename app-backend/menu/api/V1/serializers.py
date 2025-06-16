@@ -3,8 +3,9 @@ from ...models import MenuItem, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
-    """Serialize category data for listing and detail views."""
+    """
+    Serialize category data for listing and detail views.
+    """
 
     class Meta:
         model = Category
@@ -13,8 +14,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class MenuItemSerializer(serializers.ModelSerializer):
-
-    """Serialize menu item for listing and detail, with extra computed fields."""
+    """
+    Serialize menu item for listing and detail, with extra computed fields.
+    """
     
     category = CategorySerializer(many=True, read_only=True)
     detail_link = serializers.SerializerMethodField()
