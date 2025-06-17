@@ -11,7 +11,7 @@ class UserProfileView(RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        return self.request.user.user_profile
+        return self.request.user.profile
 
 class ReservationCustomerListAPIView(ListAPIView):
     serializer_class = ReservationSerializer
