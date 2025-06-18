@@ -1,42 +1,36 @@
 from rest_framework import generics
-from reservations.models import Reservation  
-from .serializers import ReservationSerializer
-from reservations.api.V1.tasks import send_reservation_email  
 from rest_framework.permissions import IsAuthenticated
-
-
+from rest_framework.exceptions import ValidationError
+from reservations.models import Reservation
+from .serializers import ReservationSerializer
+from .tasks import send_reservation_email  # اگه ایمیل رو با Celery می‌فرستی
 
 from rest_framework.exceptions import ValidationError
-
 class ReservationCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = Reservation.objects.select_related("user")
     serializer_class = ReservationSerializer
+    queryset = Reservation.objects.select_related("user")
 
     def perform_create(self, serializer):
         user = self.request.user
 
-        # بررسی اینکه پروفایل کاربر شماره تلفن داره یا نه
         try:
-            phone = user.profile.phone
+            phone = user.profile.phone_number
         except AttributeError:
             raise ValidationError("پروفایل شما کامل نیست. لطفاً شماره تلفن خود را در پروفایل وارد کنید.")
 
         if not phone:
-            raise ValidationError("شماره تلفن یافت نشد. لطفاً پروفایل خود را کامل کنید.")
+            raise ValidationError("شماره تلفن شما ثبت نشده. لطفاً ابتدا پروفایل خود را تکمیل کنید.")
 
-        # ذخیره رزرو با ایمیل و تلفن از اطلاعات کاربر
-        reservation = serializer.save(
-            user=user,
-            email=user.email,
-            phone=phone
-        )
+        reservation = serializer.save(user=user)
 
         # ارسال ایمیل
         try:
+            name = user.profile.get_fullname() if hasattr(user, "profile") else user.username
+
             send_reservation_email.delay(
-                reservation.name,
-                reservation.email,
+                name,
+                user.email,
                 str(reservation.date),
                 str(reservation.time)
             )

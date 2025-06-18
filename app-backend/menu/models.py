@@ -76,10 +76,3 @@ class MenuItem(models.Model):
         return self.stock == 0
 
 
-class GalleryMenu(models.Model):
-    menu = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name="menu_item")
-    image = models.ImageField(upload_to="gallery/menu_items", null=True, blank=True)
-
-    class Meta:
-        verbose_name = "عکس"
-        verbose_name_plural = "گالری تصاویر"

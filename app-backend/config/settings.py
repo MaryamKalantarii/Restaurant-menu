@@ -65,7 +65,7 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'config.urls'
-
+    
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -176,8 +176,8 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-
-
+ 
+  
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/1'

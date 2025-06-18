@@ -1,11 +1,7 @@
 from django.urls import path
-from dashboard.customer.api.V1.views import GetProfileCustomerAPIView, UpdateProfileCustomerAPIView, \
-                                            GetReservationCustomerListAPIView
-
-
+from .views import UserProfileView,ReservationCustomerListAPIView
 
 urlpatterns = [
-    path("profile_customer/", GetProfileCustomerAPIView.as_view(), name="get_profile"),
-    path("profile_customer/<int:pk>/update/", UpdateProfileCustomerAPIView.as_view(), name="update_profile"),
-    path('reserve-list_customer/', GetReservationCustomerListAPIView.as_view(), name='reserve-list-customer'),
+    path('my-profile/', UserProfileView.as_view(), name='my-profile'),
+    path('my-reserved/', ReservationCustomerListAPIView.as_view(), name='List-reserved'),
 ]

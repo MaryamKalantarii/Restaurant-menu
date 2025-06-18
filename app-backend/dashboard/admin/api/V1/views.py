@@ -1,92 +1,61 @@
-from rest_framework import generics, permissions
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAdminUser
+from reservations.models import Reservation
+from rest_framework import permissions
+from reservations.models import Reservation
+from .serializers import AdminReservationSerializer,AdminUserSerializer
+from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from accounts.models import Profile
-from dashboard.admin.api.V1.serializers import AllProfileCustomerSerializer
-from dashboard.admin.api.V1.paginations import UserListPagination
-from dashboard.admin.api.V1.serializers import CreateCategorySerializer, CreateMenuItemSerializer, \
-                UpdateCategorySerializer, UpdateMenuSerializer
-from menu.models import MenuItem, Category
-from reservations.models import Reservation
-from reservations.api.V1.serializers import ReservationSerializer
+from menu.models import MenuItem, Category, ProductStatusType
+from menu.api.V1.serializers import MenuItemSerializer,CategorySerializer
 
 
-class AllProfileCustomerAPIView(generics.ListAPIView):
+User = get_user_model()
 
-    """List all user profiles (admin access only), with search, ordering, and pagination."""
-    
-    queryset = Profile.objects.select_related("user")
-    serializer_class = AllProfileCustomerSerializer
-    permission_classes = [permissions.IsAdminUser]
-    pagination_class = UserListPagination
+
+class IsAdminUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_staff
+
+class AdminReservationCreateView(ModelViewSet):
+    queryset = Reservation.objects.all()
+    serializer_class = AdminReservationSerializer
+    permission_classes = [IsAdminUser]
+
+
+
+class AdminUserViewSet(ModelViewSet):
+    queryset = User.objects.all().select_related('profile')
+    serializer_class = AdminUserSerializer
+    permission_classes = [IsAdminUser]
+
+
+
+class AdminMenuItemView(ModelViewSet):
+
+    queryset = MenuItem.objects.filter(status=ProductStatusType.publish.value) 
+    serializer_class = MenuItemSerializer 
+    permission_classes = [IsAdminUser]
+    lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['first_name', 'last_name', 'phone_number', 'user__email']
-
-
-class CreateMenuItemAPIView(generics.CreateAPIView):
-
-    """Create a new menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = CreateMenuItemSerializer
-    permission_classes = [permissions.IsAdminUser]
+    filterset_fields = ['category']
+    search_fields = ['description', 'category__title']
+    ordering_fields = ['created_date', 'price']
+    ordering = ['-created_date']
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 
-class UpdateMenuAPIView(generics.UpdateAPIView):
 
-    """Update a menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = UpdateMenuSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class RemoveMenuAPIView(generics.DestroyAPIView):
-
-    """Delete a menu item (admin only)."""
-
-    queryset = MenuItem.objects.select_related("user").prefetch_related("category")
-    serializer_class = UpdateMenuSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class CreateCategoryMenuAPIView(generics.CreateAPIView):
-
-    """Create a new category (admin only)."""
+class AdminCategoryView(ModelViewSet):
 
     queryset = Category.objects.all()
-    serializer_class = CreateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-
-class UpdateCategoryMenuAPIView(generics.UpdateAPIView):
-
-    """Update a category (admin only)."""
-
-    queryset = Category.objects.all()
-    serializer_class = UpdateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class RemoveCategoryMenuAPIView(generics.DestroyAPIView):
-
-    """Delete a category (admin only)."""
-    
-    queryset = Category.objects.all()
-    serializer_class = UpdateCategorySerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-
-class AdminReservationListView(generics.ListAPIView):
-    queryset = Reservation.objects.select_related("user")
-    serializer_class = ReservationSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class DeleteResevationAPIView(generics.DestroyAPIView):
-    queryset = Reservation.objects.select_related("user")
-    permission_classes = [permissions.IsAdminUser]
-    serializer_class = ReservationSerializer
+    serializer_class = CategorySerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'slug'
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ['title']
+    ordering_fields = ['title']
+    ordering = ['title']

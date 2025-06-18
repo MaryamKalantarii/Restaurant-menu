@@ -1,46 +1,21 @@
-from rest_framework import generics, permissions
-from django.http import Http404
-from accounts.models import Profile
+from rest_framework.generics import RetrieveUpdateAPIView,ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from reservations.models import Reservation
-from dashboard.customer.api.V1.serializers import UpdateProfileCustomerSerializer, GetProfileCustomerSerializer, \
-                                    CustomerReservationSerializer
+from dashboard.admin.api.V1.serializers import (
+        ProfileSerializer
+)
+from reservations.api.V1.serializers import ReservationSerializer
 
-
-
-class UpdateProfileCustomerAPIView(generics.UpdateAPIView):
-
-    """Update the authenticated user's profile."""
-
-    serializer_class = UpdateProfileCustomerSerializer
-    queryset = Profile.objects.select_related("user")
-    permission_classes = [permissions.IsAuthenticated]
+class UserProfileView(RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        try:
-            return self.queryset.get(user=self.request.user)
-        except Profile.DoesNotExist:
-            raise Http404("پروفایل کاربر یافت نشد")
+        return self.request.user.profile
 
-
-class GetProfileCustomerAPIView(generics.RetrieveAPIView):
-
-    """Retrieve the profile of the authenticated user."""
-
-    queryset = Profile.objects.select_related("user")
-    serializer_class = GetProfileCustomerSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_object(self):
-        try:
-            return self.queryset.get(user=self.request.user)
-        except Profile.DoesNotExist:
-            raise Http404("پروفایل کاربر یافت نشد")
-        
-
-
-class GetReservationCustomerListAPIView(generics.ListAPIView):
-    serializer_class = CustomerReservationSerializer
-    permission_classes = [permissions.IsAuthenticated]
+class ReservationCustomerListAPIView(ListAPIView):
+    serializer_class = ReservationSerializer
+    permission_classes = [IsAuthenticated]
     
 
     def get_queryset(self):
