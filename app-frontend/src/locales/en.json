@@ -178,7 +178,25 @@
     "projects": "Projects",
     "hoursOfSupport": "Hours Of Support",
     "workers": "Workers"
+  },
+
+  "dashboard": {
+    "welcome": "🎉 Welcome to Your Dashboard",
+    "logout": "Logout",
+    "loading": "Fetching your reservations...",
+    "noReservations": "No reservations found ☕",
+    "reservation": "📌 Reservation",
+    "date": "📅 Date",
+    "time": "⏰ Time",
+    "people": "👥 People",
+    "createdAt": "🕓 Created At",
+    "email": "📧 Email",
+    "phone": "📞 Phone"
   }
+
+
+
+
 }
 
 

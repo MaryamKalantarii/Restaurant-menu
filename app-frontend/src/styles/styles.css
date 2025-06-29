@@ -483,3 +483,111 @@ body.dark-theme .social a:hover {
 .icon-button:hover {
   color: #ff0000; /* رنگ دلخواه برای hover */
 }
+/* استایل‌دهی به Toastify برای حذف نوار سفید */
+.Toastify__toast-container {
+  background-color: transparent !important; /* پس‌زمینه شفاف برای جلوگیری از نوار سفید */
+  z-index: 9999; /* بالا آوردن توستیفای برای اینکه در بالای همه چیز باشه */
+}
+
+.Toastify__toast {
+  background-color: #333 !important; /* پس‌زمینه تاریک برای توست در دارک مود */
+  color: #fff !important; /* رنگ متن سفید */
+  box-shadow: none !important; /* حذف سایه اضافی */
+}
+
+.Toastify__toast--error {
+  background-color: #f44336 !important; /* رنگ پس‌زمینه خطا (قرمز) */
+}
+
+.Toastify__toast--success {
+  background-color: #4caf50 !important; /* رنگ پس‌زمینه موفقیت (سبز) */
+}
+/* استایل‌دهی برای ToastContainer */
+/* تغییر رنگ پس زمینه Toastify */
+.Toastify__toast-container {
+  z-index: 9999 !important;
+}
+
+/* تغییر رنگ نوار Toast */
+.Toastify__toast--error {
+  background-color: rgba(0, 0, 0, 0.8) !important;  /* پس‌زمینه مشکی */
+  color: #fff !important;  /* متن سفید */
+  border-radius: 8px !important;  /* گوشه‌های گرد */
+  padding: 10px !important;  /* فاصله داخلی */
+}
+
+.Toastify__toast--success {
+  background-color: rgba(0, 128, 0, 0.8) !important;  /* پس‌زمینه سبز */
+  color: #fff !important;  /* متن سفید */
+  border-radius: 8px !important;
+  padding: 10px !important;
+}
+
+.Toastify__toast--info {
+  background-color: rgba(0, 0, 255, 0.8) !important;  /* پس‌زمینه آبی */
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+}
+
+.Toastify__toast--warning {
+  background-color: rgba(255, 165, 0, 0.8) !important;  /* پس‌زمینه نارنجی */
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+}
+.reservation-form-bg {
+  background-color: #ffffff; /* لایت مود */
+  padding: 30px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-theme .reservation-form-bg {
+  background-color: #2a2a2a; /* دارک مود */
+}
+.reservation-form-bg {
+  background-color: rgba(197, 197, 197, 0.329) !important;
+}
+/* استایل برای Toastify در حالت دارک */
+body.dark-theme .Toastify__toast-container {
+  background-color: transparent !important;
+}
+
+body.dark-theme .Toastify__toast {
+  background-color: #333 !important;
+  color: #f8f9fa !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .Toastify__close-button {
+  color: #f8f9fa !important;
+}
+html.dark-theme section.Toastify {
+  background-color: black !important;
+}
+section.Toastify {
+  background-color: transparent;
+}
+
+body.dark-theme section.Toastify {
+  display: none !important;
+}
+
+.dashboard-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #ffd0d093;
+  box-shadow: 0 2px 6px rgba(111, 78, 55, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-icon:hover {
+  background-color: #ff000049;
+  transform: scale(1.1);
+}
+
