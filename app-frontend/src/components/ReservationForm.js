@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
-import axios from 'axios';
-import { useTranslation } from 'react-i18next';
-import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios'; 
+import { useTranslation } from 'react-i18next'; 
+import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
 
 function ReservationForm() {
@@ -15,13 +15,14 @@ function ReservationForm() {
   });
 
   const [userData, setUserData] = useState(null);
+  const [reservations, setReservations] = useState([]); // برای ذخیره رزروهای کاربر
   const [loading, setLoading] = useState(false);
 
   // گرفتن اطلاعات کاربر
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/dashboard/api/V1/profile_customer/', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('access')}`  
+        Authorization: `Bearer ${localStorage.getItem('access')}`
       }
     })
     .then(res => {
@@ -32,6 +33,19 @@ function ReservationForm() {
     })
     .catch(err => {
       toast.error('برای رزرو باید وارد شوید.');
+    });
+
+    // درخواست برای دریافت رزروهای کاربر
+    axios.get("http://127.0.0.1:8000/reservations/api/V1/user-reservations/", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`
+      }
+    })
+    .then(response => {
+      setReservations(response.data); // ذخیره رزروها در state
+    })
+    .catch(error => {
+      console.error("خطا در دریافت رزروها:", error);
     });
   }, []);
 
@@ -73,16 +87,16 @@ function ReservationForm() {
   return (
     <>
       {/* استایل‌دهی به ToastContainer */}
-<ToastContainer
-  position="bottom-right"
-  autoClose={5000}
-  hideProgressBar={true}
-  closeButton={false}
-  newestOnTop={false}
-  rtl={true}
-  theme="dark"
-  style={{ zIndex: 9999 }}
-/>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={true}
+        closeButton={false}
+        newestOnTop={false}
+        rtl={true}
+        theme="dark"
+        style={{ zIndex: 9999 }}
+      />
 
       <section id="book-a-table" className="book-a-table section">
         <div className="container section-title" data-aos="fade-up">
@@ -192,6 +206,7 @@ function ReservationForm() {
           </div>
         </div>
       </section>
+
     </>
   );
 }

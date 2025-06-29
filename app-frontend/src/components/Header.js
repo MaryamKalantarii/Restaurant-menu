@@ -64,7 +64,22 @@ function Header() {
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a className="btn-getstarted" href="#book-a-table">{t('bookTable')}</a>
+        {/* دکمه رزرو و آیکن داشبورد در کنار هم */}
+        <div className="d-flex align-items-center gap-3">
+          <a className="btn-getstarted" href="#book-a-table">{t('bookTable')}</a>
+        </div>
+{localStorage.getItem('access') && (
+  <Link to="/dashboard" title="dashboard" className="dashboard-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#6f4e37"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4Z" />
+      <path d="M20 20c0-4-4-6-8-6s-8 2-8 6" />
+    </svg>
+  </Link>
+)}
+
+
+
       </div>
     </header>
   );

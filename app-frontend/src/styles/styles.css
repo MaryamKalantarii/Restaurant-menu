@@ -574,3 +574,20 @@ section.Toastify {
 body.dark-theme section.Toastify {
   display: none !important;
 }
+
+.dashboard-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #ffd0d093;
+  box-shadow: 0 2px 6px rgba(111, 78, 55, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-icon:hover {
+  background-color: #ff000049;
+  transform: scale(1.1);
+}
+

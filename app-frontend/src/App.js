@@ -17,6 +17,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AuthForm from './components/AuthForm';
 import EmailVerified from './components/EmailVerified';
+import Dashboard from './pages/Dashboard';
+
+
 import './styles/styles.css';
 
 function App() {
@@ -58,6 +61,10 @@ function App() {
           } />
           <Route path="/login" element={<AuthForm />} />
           <Route path="/email-verified" element={<EmailVerified />} />
+
+         <Route path="/dashboard" element={<Dashboard />} />
+
+
         </Routes>
         <Footer />
       </Router>
