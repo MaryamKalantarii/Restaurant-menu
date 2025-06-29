@@ -150,7 +150,9 @@ function Dashboard() {
                     {t('dashboard.createdAt')}: {new Date(reservation.created_date).toLocaleString('en-US')}
                   </p>
                   <p className="card-text small text-muted">{t('dashboard.email')}: {reservation.email}</p>
-               
+                  {reservation.phone && (
+                    <p className="card-text small text-muted">{t('dashboard.phone')}: {reservation.phone}</p>
+                  )}
                 </div>
               </div>
             </div>

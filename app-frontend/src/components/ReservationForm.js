@@ -95,6 +95,17 @@ function ReservationForm() {
                   </div>
                   <div className="col-lg-4 col-md-6">
                     <input
+                      type="text"
+                      name="phone"
+                      className="form-control"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder={t('reservation.phone')}
+                      required
+                    />
+                  </div>
+                  <div className="col-lg-4 col-md-6">
+                    <input
                       type="date"
                       name="date"
                       className="form-control"
