@@ -38,12 +38,17 @@ function Header() {
         offset: -80,
       });
     }
-    setActiveLink(id); // تغییر لینک فعال
+    setActiveLink(id); 
   };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLangMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('access'); 
+    window.location.reload(); 
   };
 
   return (
@@ -67,11 +72,19 @@ function Header() {
               </li>
             ))}
 
-            <li>
-              <RouterLink to="/login" className="nav-link">
-                {t('login')}
-              </RouterLink>
-            </li>
+            {!localStorage.getItem('access') ? (
+              <li>
+                <RouterLink to="/login" className="nav-link">
+                  {t('login')}
+                </RouterLink>
+              </li>
+            ) : (
+              <li>
+                <button onClick={handleLogout} className="nav-link">
+                  {t('logout')}
+                </button>
+              </li>
+            )}
 
             <li>
               <ThemeToggle />
