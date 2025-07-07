@@ -43,27 +43,42 @@ function ReservationForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      await axios.post('http://127.0.0.1:8000/reservations/api/V1/reserve/', formData, {
+    console.log('در حال ارسال فرم با داده‌ها:', formData); // لاگ برای بررسی داده‌های فرم
+
+    const response = await axios.post(
+      'http://127.0.0.1:8000/reservations/api/V1/reserve/',
+      formData,
+      {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
+          'Content-Type': 'application/json',
         },
-      });
+      }
+    );
 
-      toast.success('رزرو با موفقیت انجام شد!');
-      setFormData({ name: '', date: '', time: '', people: '', message: '' });
+    toast.success('رزرو با موفقیت انجام شد!');
+    setFormData({ name: '', date: '', time: '', people: '', message: '', phone: '' });
 
-    } catch (err) {
-      toast.error('خطا در ثبت رزرو. لطفاً دوباره تلاش کنید.');
-    } finally {
-      setLoading(false);
+  } catch (err) {
+    console.error('خطا در ارسال رزرو:', err);
+
+    if (err.response) {
+      console.error('پاسخ سرور:', err.response.data);
+      toast.error(`خطا: ${JSON.stringify(err.response.data)}`);
+    } else {
+      toast.error('مشکلی در ارتباط با سرور پیش آمد.');
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
