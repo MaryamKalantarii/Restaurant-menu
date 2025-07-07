@@ -61,14 +61,52 @@ body.dark-theme #header {
   background-color: #1c1c1c !important; /* پس‌زمینه تیره برای هدر */
   border-bottom: 1px solid #333 !important;
 }
-
-/* متن‌های هدر مثل لوگو و منوها */
+/* استایل برای رنگ متن‌های هدر در حالت دارک */
 body.dark-theme #header .logo h1,
 body.dark-theme #header .logo span,
-body.dark-theme #header .navmenu a,
-body.dark-theme #header .btn-getstarted {
-  color: #f8f9fa !important;
+body.dark-theme #header .navmenu a {
+  color: #fff !important; /* رنگ سفید برای لوگو و منوها */
 }
+
+/* استایل برای دکمه‌ها (اگر دکمه‌ها داری) */
+body.dark-theme .navmenu .nav-link {
+  color: #fff !important; /* رنگ سفید برای لینک‌های نوار منو */
+}
+
+/* استایل برای حالت فعال در نوار منو */
+body.dark-theme .navmenu .nav-link.active {
+  background-color: #333 !important; /* پس‌زمینه تیره برای حالت فعال */
+  color: #fff !important; /* رنگ سفید برای متن حالت فعال */
+}
+
+/* استایل برای رنگ متن‌های نوار منو در حالت دارک */
+body.dark-theme #header .navmenu a {
+  color: #ff0000 !important; /* رنگ سفید برای لینک‌ها */
+}/* استایل برای حالت active */
+.navmenu .nav-link.active {
+  border-bottom: 3px solid red; /* خط قرمز زیر لینک‌ها */
+  color: #ff0000; /* تغییر رنگ متن */
+}
+
+/* برای پیش‌فرض و فعال شدن در لایت‌مود و دارک‌مود */
+body.light-theme .navmenu .nav-link,
+body.dark-theme .navmenu .nav-link {
+  color: inherit; /* رنگ متن به ارث برده */
+  border-bottom: none; /* حذف خط‌های زیر لینک‌ها در حالت غیر فعال */
+}
+
+/* استایل برای لینک‌های فعال */
+body.dark-theme .navmenu .nav-link.active {
+  color: #ff0a0a;
+  border-bottom: 3px solid red;
+}
+
+body.light-theme .navmenu .nav-link.active {
+  color: #000;
+  border-bottom: 3px solid red;
+}
+
+
 /* استایل عمومی برای دکمه تغییر تم */
 .theme-toggle-btn {
   background: none;
