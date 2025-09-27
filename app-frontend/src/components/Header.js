@@ -3,11 +3,12 @@ import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from 'react-i18next';
-
+import '../styles/styles.css';
 function Header() {
   const { t, i18n } = useTranslation();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('home');
+  const [activeLink, setActiveLink] = useState('hero');
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,34 +21,29 @@ function Header() {
     { id: 'gallery', label: t('gallerry') },
     { id: 'contact', label: t('contactt') },
   ];
+
   const scrollToSection = (id) => {
     if (location.pathname !== '/') {
       navigate('/', { replace: false });
       setTimeout(() => {
-        scroller.scrollTo(id, {
-          duration: 500,
-          smooth: true,
-          offset: -80,
-        });
+        scroller.scrollTo(id, { duration: 500, smooth: true, offset: -80 });
       }, 100);
     } else {
-      scroller.scrollTo(id, {
-        duration: 500,
-        smooth: true,
-        offset: -80,
-      });
+      scroller.scrollTo(id, { duration: 500, smooth: true, offset: -80 });
     }
-    setActiveLink(id); 
+    setActiveLink(id);
+    setMenuOpen(false); // بستن منو پس از کلیک
   };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLangMenuOpen(false);
+    setMenuOpen(false);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('access'); 
-    window.location.reload(); 
+    localStorage.removeItem('access');
+    window.location.reload();
   };
 
   return (
@@ -57,14 +53,21 @@ function Header() {
           <h1 className="sitename">Yummy</h1><span>.</span>
         </a>
 
-        <nav id="navmenu" className="navmenu">
+        {/* همبرگر موبایل */}
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+        </button>
+
+        {/* منوی اصلی */}
+        <nav id="navmenu" className={`navmenu ${menuOpen ? 'open' : ''}`}>
           <ul>
             {navLinks.map((link) => (
               <li key={link.id}>
                 <button
                   className={`nav-link ${activeLink === link.id ? 'active' : ''}`}
                   onClick={() => scrollToSection(link.id)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                   {link.label}
                 </button>
