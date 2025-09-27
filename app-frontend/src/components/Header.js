@@ -1,26 +1,49 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from 'react-i18next';
-
+import '../styles/styles.css';
 function Header() {
   const { t, i18n } = useTranslation();
-  const [activeLink, setActiveLink] = useState('#hero');
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('hero');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navLinks = [
-    { href: '#hero', label: t('home') },
-    { href: '#about', label: t('aboutYummy') },
-    { href: '#menu', label: t('menuu') },
-    { href: '#events', label: t('eveents') },
-    { href: '#chefs', label: t('chefsTitle') },
-    { href: '#gallery', label: t('gallerry') },
-    { href: '#contact', label: t('contactt') },
+    { id: 'hero', label: t('home') },
+    { id: 'about', label: t('aboutYummy') },
+    { id: 'menu', label: t('menuu') },
+    { id: 'events', label: t('eveents') },
+    { id: 'chefs', label: t('chefsTitle') },
+    { id: 'gallery', label: t('gallerry') },
+    { id: 'contact', label: t('contactt') },
   ];
+
+  const scrollToSection = (id) => {
+    if (location.pathname !== '/') {
+      navigate('/', { replace: false });
+      setTimeout(() => {
+        scroller.scrollTo(id, { duration: 500, smooth: true, offset: -80 });
+      }, 100);
+    } else {
+      scroller.scrollTo(id, { duration: 500, smooth: true, offset: -80 });
+    }
+    setActiveLink(id);
+    setMenuOpen(false); // بستن منو پس از کلیک
+  };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setLangMenuOpen(false);
+    setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('access');
+    window.location.reload();
   };
 
   return (
@@ -30,25 +53,45 @@ function Header() {
           <h1 className="sitename">Yummy</h1><span>.</span>
         </a>
 
-        <nav id="navmenu" className="navmenu">
+        {/* همبرگر موبایل */}
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+        </button>
+
+        {/* منوی اصلی */}
+        <nav id="navmenu" className={`navmenu ${menuOpen ? 'open' : ''}`}>
           <ul>
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={activeLink === link.href ? 'active' : ''}
-                  onClick={() => setActiveLink(link.href)}
+              <li key={link.id}>
+                <button
+                  className={`nav-link ${activeLink === link.id ? 'active' : ''}`}
+                  onClick={() => scrollToSection(link.id)}
                 >
                   {link.label}
-                </a>
+                </button>
               </li>
             ))}
-            <li>
-              <Link to="/login" className="nav-link">{t('login')}</Link>
-            </li>
+
+            {!localStorage.getItem('access') ? (
+              <li>
+                <RouterLink to="/login" className="nav-link">
+                  {t('login')}
+                </RouterLink>
+              </li>
+            ) : (
+              <li>
+                <button onClick={handleLogout} className="nav-link">
+                  {t('logout')}
+                </button>
+              </li>
+            )}
+
             <li>
               <ThemeToggle />
             </li>
+
             <li className="language-dropdown">
               <button onClick={() => setLangMenuOpen(!langMenuOpen)} className="lang-btn">
                 🌐 {i18n.language.toUpperCase()}
@@ -61,25 +104,17 @@ function Header() {
               )}
             </li>
           </ul>
-          <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        {/* دکمه رزرو و آیکن داشبورد در کنار هم */}
-        <div className="d-flex align-items-center gap-3">
-          <a className="btn-getstarted" href="#book-a-table">{t('bookTable')}</a>
-        </div>
-{localStorage.getItem('access') && (
-  <Link to="/dashboard" title="dashboard" className="dashboard-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#6f4e37"
-      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4Z" />
-      <path d="M20 20c0-4-4-6-8-6s-8 2-8 6" />
-    </svg>
-  </Link>
-)}
-
-
-
+        {localStorage.getItem('access') && (
+          <RouterLink to="/dashboard" title="dashboard" className="dashboard-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#6f4e37"
+              strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4Z" />
+              <path d="M20 20c0-4-4-6-8-6s-8 2-8 6" />
+            </svg>
+          </RouterLink>
+        )}
       </div>
     </header>
   );

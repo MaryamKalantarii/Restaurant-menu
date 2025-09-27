@@ -61,14 +61,52 @@ body.dark-theme #header {
   background-color: #1c1c1c !important; /* پس‌زمینه تیره برای هدر */
   border-bottom: 1px solid #333 !important;
 }
-
-/* متن‌های هدر مثل لوگو و منوها */
+/* استایل برای رنگ متن‌های هدر در حالت دارک */
 body.dark-theme #header .logo h1,
 body.dark-theme #header .logo span,
-body.dark-theme #header .navmenu a,
-body.dark-theme #header .btn-getstarted {
-  color: #f8f9fa !important;
+body.dark-theme #header .navmenu a {
+  color: #fff !important; /* رنگ سفید برای لوگو و منوها */
 }
+
+/* استایل برای دکمه‌ها (اگر دکمه‌ها داری) */
+body.dark-theme .navmenu .nav-link {
+  color: #fff !important; /* رنگ سفید برای لینک‌های نوار منو */
+}
+
+/* استایل برای حالت فعال در نوار منو */
+body.dark-theme .navmenu .nav-link.active {
+  background-color: #333 !important; /* پس‌زمینه تیره برای حالت فعال */
+  color: #fff !important; /* رنگ سفید برای متن حالت فعال */
+}
+
+/* استایل برای رنگ متن‌های نوار منو در حالت دارک */
+body.dark-theme #header .navmenu a {
+  color: #ff0000 !important; /* رنگ سفید برای لینک‌ها */
+}/* استایل برای حالت active */
+.navmenu .nav-link.active {
+  border-bottom: 3px solid red; /* خط قرمز زیر لینک‌ها */
+  color: #ff0000; /* تغییر رنگ متن */
+}
+
+/* برای پیش‌فرض و فعال شدن در لایت‌مود و دارک‌مود */
+body.light-theme .navmenu .nav-link,
+body.dark-theme .navmenu .nav-link {
+  color: inherit; /* رنگ متن به ارث برده */
+  border-bottom: none; /* حذف خط‌های زیر لینک‌ها در حالت غیر فعال */
+}
+
+/* استایل برای لینک‌های فعال */
+body.dark-theme .navmenu .nav-link.active {
+  color: #ff0a0a;
+  border-bottom: 3px solid red;
+}
+
+body.light-theme .navmenu .nav-link.active {
+  color: #000;
+  border-bottom: 3px solid red;
+}
+
+
 /* استایل عمومی برای دکمه تغییر تم */
 .theme-toggle-btn {
   background: none;
@@ -591,3 +629,396 @@ body.dark-theme section.Toastify {
   transform: scale(1.1);
 }
 
+/* ===== استایل فرم Auth قرمز ===== */
+.auth-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: #ffe5e5; /* قرمز خیلی ملایم */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.auth-form h2 {
+  margin-bottom: 30px;
+  color: #800000; /* قرمز تیره */
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ff9999; /* قرمز روشن */
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.auth-form input:focus {
+  border-color: #ff0000; /* قرمز واضح */
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #ff0000; /* قرمز واضح */
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form .btn-primary:hover {
+  background: #ff4d4d; /* قرمز روشن‌تر هنگام هاور */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+}
+
+.auth-form .btn-link {
+  margin-top: 15px;
+  color: #ff0000;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.message {
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #f8d7da; /* پس‌زمینه قرمز ملایم موفقیت */
+  color: #721c24;
+}
+
+.message.error {
+  background: #f5c2c7; /* پس‌زمینه قرمز ملایم خطا */
+  color: #842029;
+}
+
+
+
+
+
+/* ===== استایل فرم Auth ===== */
+.auth-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: var(--bg-color); /* استفاده از متغیر عمومی */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  color: var(--text-color); /* متن با متغیر رنگ تغییر کنه */
+}
+
+.auth-form h2 {
+  margin-bottom: 30px;
+  color: var(--text-color); /* عنوان فرم با متن هماهنگ */
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ff9999; /* می‌تونی اینو هم با متغیر بزاری */
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: var(--text-color);
+}
+/* رنگ متن داخل input ها در دارک مود */
+body.dark-theme .auth-form input {
+  background-color: #2a2a2a; /* پس‌زمینه تیره ملایم */
+  color: #d0d0d0; /* متن طوسی روشن */
+  border: 2px solid #555555; /* حاشیه ملایم‌تر */
+}
+
+body.dark-theme .auth-form input::placeholder {
+  color: #aaa; /* رنگ placeholder طوسی روشن */
+}
+
+.auth-form input:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff0000;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form .btn-primary:hover {
+  background: #ff4d4d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+}
+
+.auth-form .btn-link {
+  margin-top: 15px;
+  color: #ff0000;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.message {
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.message.error {
+  background: #f5c2c7;
+  color: #842029;
+}
+/* همبرگر موبایل */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger .bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger .bar.open:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger .bar.open:nth-child(2) { opacity: 0; }
+.hamburger .bar.open:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+@media screen and (max-width: 768px) {
+  .hamburger { display: flex; }
+
+  .navmenu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px;
+    gap: 20px;
+    transition: right 0.3s ease;
+    z-index: 1100;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+  }
+
+  .navmenu.open { right: 0; }
+
+  .navmenu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: var(--bg-color);
+  }
+
+  .navmenu li { width: 100%; }
+
+  .navmenu .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 12px 15px;
+    background: var(--bg-color);
+    border: none;
+    font-size: 16px;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+  }
+
+  .navmenu .nav-link:hover {
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  .navmenu .nav-link.active {
+    color: #ff0a0a;
+    font-weight: 600;
+  }
+
+  .navmenu .lang-btn {
+    color: var(--text-color);
+  }
+
+  .navmenu .lang-menu {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 5px 0;
+  }
+
+  .navmenu .lang-menu li {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .navmenu .lang-menu li:hover {
+    background-color: rgba(0,0,0,0.05);
+  }
+}
+
+/* دارک مود */
+body.dark-theme .navmenu,
+body.dark-theme .navmenu.open {
+  background-color: #202020 !important;
+  color: #313233 !important;
+}
+body.dark-theme .navmenu .nav-link,
+body.dark-theme .navmenu.open .nav-link {
+  color: #b3a9a9 !important;
+}
+body.dark-theme .navmenu .nav-link.active {
+  color: #ff0a0a !important;
+}
+body.dark-theme .navmenu .lang-btn {
+  color: #9f9fa0 !important;
+}
+body.dark-theme .navmenu .lang-menu {
+  background-color: #202020 !important;
+  color: #c9c9c9 !important;
+  border: 1px solid #555 !important;
+}
+
+
+
+
+/* EmailVerified.css */
+
+/* پس‌زمینه کل صفحه */
+.email-verified-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #727070, #000000, #b91c1c);
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* کارت پیام */
+.email-verified-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 50px 30px;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.email-verified-box:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* آیکن */
+.email-verified-icon {
+  font-size: 6rem;
+  margin-bottom: 25px;
+  transition: all 0.5s ease;
+}
+
+.email-verified-icon.success {
+  color: #ffd700; /* طلایی */
+  text-shadow: 0 0 15px #ffd700, 0 0 30px #ffb800;
+  animation: pulse 1.5s infinite;
+}
+
+.email-verified-icon.error {
+  color: #ff4c4c; /* قرمز روشن */
+  text-shadow: 0 0 15px #ff4c4c, 0 0 30px #ff0000;
+  animation: shake 0.8s infinite;
+}
+
+/* تیتر */
+.email-verified-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+/* پیام توضیحی */
+.email-verified-message {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+/* شمارش معکوس */
+.email-verified-count {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* انیمیشن‌ها */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
