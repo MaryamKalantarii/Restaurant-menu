@@ -7,6 +7,8 @@ from .tasks import send_reservation_email  # اگه ایمیل رو با Celery 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
+
+
 class ReservationCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ReservationSerializer
