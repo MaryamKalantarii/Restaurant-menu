@@ -933,3 +933,92 @@ body.dark-theme .navmenu .lang-menu {
   color: #c9c9c9 !important;
   border: 1px solid #555 !important;
 }
+
+
+
+
+/* EmailVerified.css */
+
+/* پس‌زمینه کل صفحه */
+.email-verified-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #727070, #000000, #b91c1c);
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* کارت پیام */
+.email-verified-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 50px 30px;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.email-verified-box:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* آیکن */
+.email-verified-icon {
+  font-size: 6rem;
+  margin-bottom: 25px;
+  transition: all 0.5s ease;
+}
+
+.email-verified-icon.success {
+  color: #ffd700; /* طلایی */
+  text-shadow: 0 0 15px #ffd700, 0 0 30px #ffb800;
+  animation: pulse 1.5s infinite;
+}
+
+.email-verified-icon.error {
+  color: #ff4c4c; /* قرمز روشن */
+  text-shadow: 0 0 15px #ff4c4c, 0 0 30px #ff0000;
+  animation: shake 0.8s infinite;
+}
+
+/* تیتر */
+.email-verified-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+/* پیام توضیحی */
+.email-verified-message {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+/* شمارش معکوس */
+.email-verified-count {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* انیمیشن‌ها */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
