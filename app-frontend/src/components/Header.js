@@ -20,7 +20,6 @@ function Header() {
     { id: 'gallery', label: t('gallerry') },
     { id: 'contact', label: t('contactt') },
   ];
-
   const scrollToSection = (id) => {
     if (location.pathname !== '/') {
       navigate('/', { replace: false });

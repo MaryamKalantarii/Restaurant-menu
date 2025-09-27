@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import '../styles/styles.css';
+
 
 function AuthForm() {
   const { t } = useTranslation();

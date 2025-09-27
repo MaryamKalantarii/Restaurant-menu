@@ -629,3 +629,182 @@ body.dark-theme section.Toastify {
   transform: scale(1.1);
 }
 
+/* ===== استایل فرم Auth قرمز ===== */
+.auth-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: #ffe5e5; /* قرمز خیلی ملایم */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.auth-form h2 {
+  margin-bottom: 30px;
+  color: #800000; /* قرمز تیره */
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ff9999; /* قرمز روشن */
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.auth-form input:focus {
+  border-color: #ff0000; /* قرمز واضح */
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #ff0000; /* قرمز واضح */
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form .btn-primary:hover {
+  background: #ff4d4d; /* قرمز روشن‌تر هنگام هاور */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+}
+
+.auth-form .btn-link {
+  margin-top: 15px;
+  color: #ff0000;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.message {
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #f8d7da; /* پس‌زمینه قرمز ملایم موفقیت */
+  color: #721c24;
+}
+
+.message.error {
+  background: #f5c2c7; /* پس‌زمینه قرمز ملایم خطا */
+  color: #842029;
+}
+
+
+
+
+
+/* ===== استایل فرم Auth ===== */
+.auth-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: var(--bg-color); /* استفاده از متغیر عمومی */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  color: var(--text-color); /* متن با متغیر رنگ تغییر کنه */
+}
+
+.auth-form h2 {
+  margin-bottom: 30px;
+  color: var(--text-color); /* عنوان فرم با متن هماهنگ */
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ff9999; /* می‌تونی اینو هم با متغیر بزاری */
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: var(--text-color);
+}
+/* رنگ متن داخل input ها در دارک مود */
+body.dark-theme .auth-form input {
+  background-color: #2a2a2a; /* پس‌زمینه تیره ملایم */
+  color: #d0d0d0; /* متن طوسی روشن */
+  border: 2px solid #555555; /* حاشیه ملایم‌تر */
+}
+
+body.dark-theme .auth-form input::placeholder {
+  color: #aaa; /* رنگ placeholder طوسی روشن */
+}
+
+.auth-form input:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff0000;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form .btn-primary:hover {
+  background: #ff4d4d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+}
+
+.auth-form .btn-link {
+  margin-top: 15px;
+  color: #ff0000;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.message {
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.message.error {
+  background: #f5c2c7;
+  color: #842029;
+}
