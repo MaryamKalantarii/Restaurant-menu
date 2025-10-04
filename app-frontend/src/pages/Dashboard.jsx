@@ -29,13 +29,14 @@ function Dashboard() {
       .catch(() => setLoading(false));
 
       // گرفتن پروفایل
-      axios.get('http://127.0.0.1:8000/accounts/api/V1/profile/', {
+      axios.get('http://127.0.0.1:8000/dashboard/api/V1/my-profile/', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         setUserData(res.data);
-        if (res.data.profile_image) {
-          setProfileImage(res.data.profile_image);
+        if (res.data.image) {
+          // اضافه کردن URL کامل برای نمایش عکس
+          setProfileImage(res.data.image);
         }
       })
       .catch((err) => console.error(err));
@@ -59,7 +60,6 @@ function Dashboard() {
     setUserData({
       first_name: "",
       last_name: "",
-      email: "",
       phone_number: ""
     });
     setProfileImage(null);
@@ -85,14 +85,13 @@ function Dashboard() {
     const formData = new FormData();
     formData.append('first_name', userData.first_name || '');
     formData.append('last_name', userData.last_name || '');
-    formData.append('email', userData.email || '');
     formData.append('phone_number', userData.phone_number || '');
     if (selectedFile) {
-      formData.append('profile_image', selectedFile);
+      formData.append('image', selectedFile);
     }
 
     axios
-      .patch('http://127.0.0.1:8000/accounts/api/V1/profile/', formData, {
+      .patch('http://127.0.0.1:8000/dashboard/api/V1/my-profile/', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -100,14 +99,14 @@ function Dashboard() {
       })
       .then((res) => {
         setUserData(res.data);
-        if (res.data.profile_image) {
-          setProfileImage(res.data.profile_image);
+        if (res.data.image) {
+          setProfileImage(res.data.image);
         }
-        alert('✅ Profile updated successfully!');
+        alert('✅ پروفایل با موفقیت به‌روزرسانی شد!');
       })
       .catch((err) => {
         console.error(err);
-        alert('❌ Error updating profile.');
+        alert('❌ خطا در به‌روزرسانی پروفایل.');
       });
   };
 
@@ -123,24 +122,25 @@ function Dashboard() {
       <div className="d-flex">
         {/* کارت پروفایل */}
         <div className="me-4" style={{ minWidth: '300px', position: 'sticky', top: '80px', height: 'fit-content' }}>
-          <div className="card shadow border-0 rounded-4"
-               style={{
-                 background: 'linear-gradient(145deg, #3d0000, #1a1a1a)',
-                 color: '#ff4d4d',
-                 padding: '1.5rem',
-                 fontFamily: 'Arial, sans-serif',
-                 border: '2px solid #ff4d4d',
-                 transition: '0.3s'
-               }}
-               onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px #ff4d4d'}
-               onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 10px #000'}
+          <div
+            className="card shadow border-0 rounded-4"
+            style={{
+              background: 'linear-gradient(145deg, #3d0000, #1a1a1a)',
+              color: '#ff4d4d',
+              padding: '1.5rem',
+              fontFamily: 'Arial, sans-serif',
+              border: '2px solid #ff4d4d',
+              transition: '0.3s'
+            }}
+            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px #ff4d4d'}
+            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 10px #000'}
           >
             <div className="card-body d-flex flex-column align-items-center">
               <h5 className="fw-bold mb-4" style={{ textTransform: 'uppercase', fontSize: '1.4rem' }}>
                 User Profile
               </h5>
 
-              {/* پروفایل عکس با دوربین و دکمه حذف */}
+              {/* عکس پروفایل */}
               <div
                 className="rounded-circle position-relative d-flex align-items-center justify-content-center mb-4"
                 style={{
@@ -217,16 +217,6 @@ function Dashboard() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label" style={{ color: '#ff4d4d' }}>Email</label>
-                  <input 
-                    type="email" 
-                    name="email"
-                    className="form-control bg-dark text-white border-secondary input-glow" 
-                    value={userData.email || ''} 
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
                   <label className="form-label" style={{ color: '#ff4d4d' }}>Phone</label>
                   <input 
                     type="tel" 
@@ -256,6 +246,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
+      
 
         {/* رزروها سمت راست */}
         <div className="flex-grow-1">

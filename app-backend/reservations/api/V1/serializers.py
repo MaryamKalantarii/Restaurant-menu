@@ -8,7 +8,7 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reservation
-        fields = ['id', 'date', 'time', 'people', 'email', 'phone']
+        fields = ['id', 'date', 'time', 'people', 'email', 'phone','created_date']
         read_only_fields = ['id', 'email', 'phone']
 
     def get_email(self, obj):

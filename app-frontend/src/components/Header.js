@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import ThemeToggle from './ThemeToggle';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import '../styles/styles.css';
+
 function Header() {
   const { t, i18n } = useTranslation();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const token = localStorage.getItem('access');
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get('http://127.0.0.1:8000/dashboard/api/V1/my-profile/', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          if (res.data.image) {
+            const imageUrl = res.data.image.startsWith('http')
+              ? res.data.image
+              : `http://127.0.0.1:8000${res.data.image}`;
+            // اگر عکس پیش‌فرض نیست
+            if (!imageUrl.includes('default.png')) {
+              setProfileImage(imageUrl);
+            }
+          }
+        })
+        .catch((err) => console.error('خطا در دریافت پروفایل:', err));
+    }
+  }, [token]);
 
   const navLinks = [
     { id: 'hero', label: t('home') },
@@ -32,7 +57,7 @@ function Header() {
       scroller.scrollTo(id, { duration: 500, smooth: true, offset: -80 });
     }
     setActiveLink(id);
-    setMenuOpen(false); // بستن منو پس از کلیک
+    setMenuOpen(false);
   };
 
   const changeLanguage = (lng) => {
@@ -53,7 +78,7 @@ function Header() {
           <h1 className="sitename">Yummy</h1><span>.</span>
         </a>
 
-        {/* همبرگر موبایل */}
+        {/* منوی موبایل */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
           <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
@@ -74,7 +99,7 @@ function Header() {
               </li>
             ))}
 
-            {!localStorage.getItem('access') ? (
+            {!token ? (
               <li>
                 <RouterLink to="/login" className="nav-link">
                   {t('login')}
@@ -106,13 +131,37 @@ function Header() {
           </ul>
         </nav>
 
-        {localStorage.getItem('access') && (
+        {/* آیکن یا عکس پروفایل */}
+        {token && (
           <RouterLink to="/dashboard" title="dashboard" className="dashboard-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#6f4e37"
-              strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-              <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4Z" />
-              <path d="M20 20c0-4-4-6-8-6s-8 2-8 6" />
-            </svg>
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '2px solid #6f4e37',
+                }}
+              />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="none"
+                stroke="#6f4e37"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4Z" />
+                <path d="M20 20c0-4-4-6-8-6s-8 2-8 6" />
+              </svg>
+            )}
           </RouterLink>
         )}
       </div>

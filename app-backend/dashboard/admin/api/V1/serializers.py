@@ -23,6 +23,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['first_name', 'last_name', 'phone_number', 'image']
 
+    
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image and hasattr(obj.image, 'url'):
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
 class AdminUserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
 

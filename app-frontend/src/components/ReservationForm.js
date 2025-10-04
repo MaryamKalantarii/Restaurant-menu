@@ -63,7 +63,7 @@ const handleSubmit = async (e) => {
     );
 
     toast.success('رزرو با موفقیت انجام شد!');
-    setFormData({ name: '', date: '', time: '', people: '', message: '', phone: '' });
+    setFormData({ date: '', time: '', people: '', message: ''});
 
   } catch (err) {
     console.error('خطا در ارسال رزرو:', err);
@@ -97,28 +97,8 @@ const handleSubmit = async (e) => {
             <div className="col-lg-8 d-flex align-items-center reservation-form-bg" data-aos="fade-up" data-aos-delay="200">
               <form className="php-email-form" onSubmit={handleSubmit}>
                 <div className="row gy-4">
-                  <div className="col-lg-4 col-md-6">
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder={t('reservation.name')}
-                      required
-                    />
-                  </div>
-                  <div className="col-lg-4 col-md-6">
-                    <input
-                      type="text"
-                      name="phone"
-                      className="form-control"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder={t('reservation.phone')}
-                      required
-                    />
-                  </div>
+                  
+                   
                   <div className="col-lg-4 col-md-6">
                     <input
                       type="date"
